@@ -1,539 +1,1534 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venture Past Our Sky — Cinematic Space Travel</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          heading: ["'Instrument Serif'", "serif"],
-          body: ["'Barlow'", "sans-serif"],
-        },
-        borderRadius: {
-          DEFAULT: "9999px",
-        },
-      },
-    },
-  };
-</script>
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
-<script>window.Motion = window.FramerMotion || window.Motion;</script>
-
-<script>
-  /* Suppress benign Framer Motion / React list-key dev warnings */
-  (function () {
-    const origError = console.error;
-    console.error = function (...args) {
-      if (typeof args[0] === "string" && (args[0].includes('unique "key" prop') || args[0].includes("key"))) return;
-      origError.apply(console, args);
-    };
-  })();
-</script>
-
+<title>🏀 Basketball Lernguide – Prüfungsvorbereitung (Kolb 2025)</title>
 <style>
-  html, body { background: #000; }
+:root{
+  --orange:#e8622d; --orange-light:#ff8a50; --orange-dark:#c44a1a;
+  --bg:#000; --bg2:rgba(255,255,255,.04); --card:rgba(255,255,255,.02); --card-hover:rgba(255,255,255,.06);
+  --line:rgba(255,255,255,.16); --text:#fff; --muted:rgba(255,255,255,.62); --accent:#8ecdf8;
+  --green:#7ddb8a; --red:#ff6b66; --yellow:#ffd166;
+  --court:#0d1015; --court-line:rgba(255,255,255,.8);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html{background:#000}
+body{background:transparent}
+body{font-family:'Barlow',sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 15% -5%, rgba(232,98,45,.10), transparent 60%),
+             radial-gradient(800px 500px at 90% 20%, rgba(90,140,220,.08), transparent 60%),
+             radial-gradient(700px 600px at 50% 110%, rgba(232,98,45,.06), transparent 60%);}
+h1,h2,h3,h4{font-weight:400;line-height:1.1}
+h2{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-1.5px;margin-bottom:.4rem;color:#fff}
+h3{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.7rem;letter-spacing:-.5px;color:#fff;margin:2.2rem 0 .8rem}
+p{margin:.5rem 0}
+.muted{color:var(--muted);font-size:.92rem;font-weight:300}
+.hl{color:var(--orange-light);font-weight:500}
+.blue{color:var(--accent);font-weight:500}
 
-  .liquid-glass {
-    background: rgba(255,255,255,0.01);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: none;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  .liquid-glass::before {
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    padding: 1.4px;
-    background: linear-gradient(180deg,
-      rgba(255,255,255,0.45) 0%,
-      rgba(255,255,255,0.15) 20%,
-      rgba(255,255,255,0) 40%,
-      rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.15) 80%,
-      rgba(255,255,255,0.45) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
+/* ---------- liquid glass ---------- */
+.liquid-glass,.card,details,.courtbox,.sig-card,.quiz-opt,.face,.badge,.hero-badge,.stat,.chip-row,.nav-links,.nav-logo,.btn.ghost{
+  background:rgba(255,255,255,0.055);
+  background-blend-mode:luminosity;
+  backdrop-filter:blur(14px) saturate(150%);
+  -webkit-backdrop-filter:blur(14px) saturate(150%);
+  border:none;
+  box-shadow:0 10px 34px rgba(0,0,0,.45), inset 0 1px 1px rgba(255,255,255,0.2);
+  position:relative;
+  overflow:hidden;
+}
+.liquid-glass::before,.card::before,details::before,.courtbox::before,.sig-card::before,.quiz-opt::before,.face::before,.badge::before,.hero-badge::before,.stat::before,.chip-row::before,.nav-links::before,.nav-logo::before,.btn.ghost::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.25) 20%,
+    rgba(255,255,255,0.06) 40%, rgba(255,255,255,0.06) 60%,
+    rgba(255,255,255,0.25) 80%, rgba(255,255,255,0.65) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+.liquid-glass-strong,.btn{
+  background:rgba(255,255,255,0.09);background-blend-mode:luminosity;
+  backdrop-filter:blur(40px) saturate(170%);-webkit-backdrop-filter:blur(40px) saturate(170%);
+  border:none;box-shadow:0 10px 34px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,0.28);
+  position:relative;overflow:hidden;
+}
+.liquid-glass-strong::before,.btn::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.3) 20%,
+    rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.08) 60%,
+    rgba(255,255,255,0.3) 80%, rgba(255,255,255,0.75) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
 
-  .liquid-glass-strong {
-    background: rgba(255,255,255,0.01);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
-    border: none;
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
-    position: relative;
-    overflow: hidden;
-  }
-  .liquid-glass-strong::before {
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    padding: 1.4px;
-    background: linear-gradient(180deg,
-      rgba(255,255,255,0.5) 0%,
-      rgba(255,255,255,0.2) 20%,
-      rgba(255,255,255,0) 40%,
-      rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.2) 80%,
-      rgba(255,255,255,0.5) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
+/* ---------- Nav ---------- */
+nav#topnav{position:fixed;top:1rem;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:none;border:none;gap:.6rem}
+.nav-logo{width:48px;height:48px;border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo span{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.5rem;color:#fff;position:relative;z-index:1}
+.nav-links{border-radius:9999px;padding:.35rem;display:flex;align-items:center;gap:.1rem;max-width:82vw;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+nav#topnav button{background:none;border:none;color:rgba(255,255,255,.9);padding:.5rem .85rem;border-radius:9999px;cursor:pointer;font-size:.85rem;font-weight:500;font-family:'Barlow',sans-serif;white-space:nowrap;transition:.2s;position:relative;z-index:1}
+nav#topnav button:hover{color:#fff;background:rgba(255,255,255,.08)}
+nav#topnav button.active{background:#fff;color:#000;font-weight:600}
+nav#topnav button.nav-cta{background:#fff;color:#000;font-weight:600;margin-left:.2rem}
+.nav-spacer{width:48px;height:48px;visibility:hidden;flex-shrink:0}
+
+main{max-width:1020px;margin:0 auto;padding:6.5rem 1.2rem 5rem;position:relative;z-index:1}
+section.module{display:none}
+section.module.active{display:block}
+@keyframes blurUp{from{opacity:0;filter:blur(10px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:none}}
+.blur-in{animation:blurUp .8s cubic-bezier(.22,.61,.36,1) both}
+
+.kicker{color:rgba(255,255,255,.75);font-size:.85rem;font-weight:400;display:block;margin-bottom:.8rem}
+.kicker::before{content:'// '}
+.lead{color:var(--muted);margin-bottom:1.4rem;font-weight:300;max-width:60ch}
+
+/* ---------- Cards ---------- */
+.card{border-radius:1.25rem;padding:1.2rem 1.3rem;margin:.8rem 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.9rem}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.9rem}
+
+.reveal{cursor:pointer;user-select:none;transition:.2s}
+.reveal .answer{display:none;margin-top:.6rem;border-top:1px solid rgba(255,255,255,.1);padding-top:.6rem;font-weight:300}
+.reveal.open .answer{display:block;animation:blurUp .35s both}
+.reveal .tap{position:absolute;top:.7rem;right:.8rem;font-size:.68rem;color:var(--muted);border:1px solid rgba(255,255,255,.18);padding:.12rem .6rem;border-radius:9999px;z-index:2}
+.reveal.open .tap{color:var(--green);border-color:rgba(125,219,138,.5)}
+.reveal:hover{background:rgba(255,255,255,.05)}
+
+.flip-wrap{perspective:1000px;height:190px;cursor:pointer}
+.flip{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip-wrap.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:1.25rem;padding:1rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.face.back{transform:rotateY(180deg);font-size:.9rem;font-weight:300;overflow:auto;justify-content:flex-start;padding-top:.9rem}
+
+details{border-radius:1.25rem;margin:.6rem 0}
+details summary{padding:.9rem 1.2rem;cursor:pointer;font-weight:500;list-style:none;display:flex;align-items:center;gap:.6rem;position:relative;z-index:1}
+details summary::before{content:'\25B8';color:var(--orange-light);transition:.2s}
+details[open] summary::before{transform:rotate(90deg)}
+details .inner{padding:0 1.2rem 1.2rem;font-weight:300;position:relative;z-index:1}
+details summary:hover{background:rgba(255,255,255,.05)}
+
+table{width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.9rem}
+th{color:var(--orange-light);text-align:left;padding:.5rem .6rem;border:1px solid rgba(255,255,255,.12);font-weight:500;background:rgba(255,255,255,.04)}
+td{padding:.45rem .6rem;border:1px solid rgba(255,255,255,.1);vertical-align:top;font-weight:300}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+
+.badge{display:inline-block;color:var(--accent);border-radius:9999px;padding:.08rem .65rem;font-size:.74rem;font-weight:500;margin:.1rem .15rem}
+.badge.o{color:var(--orange-light)}
+.badge.g{color:var(--green)}
+
+.btn{color:#fff;padding:.55rem 1.2rem;border-radius:9999px;cursor:pointer;font-weight:500;font-size:.9rem;transition:.2s;font-family:'Barlow',sans-serif}
+.btn:hover{background:rgba(255,255,255,.1)}
+.btn.ghost{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:rgba(255,255,255,.85)}
+.btn.small{padding:.35rem .9rem;font-size:.8rem}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0;position:relative;z-index:1}
+
+.src{font-size:.76rem;color:var(--muted);border-left:2px solid rgba(232,98,45,.6);padding:.3rem .7rem;margin-top:.9rem;font-weight:300;position:relative;z-index:1}
+.src::before{content:'Beleg: ';color:var(--orange-light);font-weight:500}
+
+.note,.warn,.exam{padding:.7rem 1rem;border-radius:0 1rem 1rem 0;margin:.8rem 0;font-size:.92rem;font-weight:300;background:rgba(255,255,255,.03)}
+.note{border-left:2px solid var(--accent)}
+.warn{border-left:2px solid var(--yellow)}
+.exam{border-left:2px solid var(--red)}
+.exam::before{content:'🎯 Prüfungsrelevant: ';font-weight:600;color:var(--red)}
+
+.courtbox{border-radius:1.25rem;padding:1rem;margin:.9rem 0;text-align:center}
+.courtbox svg{max-width:100%;height:auto;position:relative;z-index:1}
+.legend{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:.4rem}
+.legend span::before{content:'\25CF';margin-right:.3rem}
+.leg-o::before{color:var(--orange)}
+.leg-b::before{color:var(--accent)}
+.leg-v::before{color:#c58ad7}
+
+.quiz-opt{display:block;width:100%;text-align:left;color:#fff;padding:.65rem 1rem;border-radius:9999px;margin:.4rem 0;cursor:pointer;font-size:.92rem;font-weight:300;transition:.15s;font-family:'Barlow',sans-serif}
+.quiz-opt:hover{background:rgba(255,255,255,.07)}
+.quiz-opt.correct{box-shadow:inset 0 0 0 1.5px rgba(125,219,138,.8);background:rgba(125,219,138,.12)}
+.quiz-opt.wrong{box-shadow:inset 0 0 0 1.5px rgba(255,107,102,.8);background:rgba(255,107,102,.12)}
+.progressbar{height:6px;background:rgba(255,255,255,.08);border-radius:9999px;overflow:hidden;margin:.5rem 0}
+.progressbar div{height:100%;background:linear-gradient(90deg,rgba(255,255,255,.5),#fff);transition:width .3s}
+
+.sig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem}
+.sig-card{border-radius:1.25rem;padding:.7rem;text-align:center;cursor:pointer;transition:.2s}
+.sig-card:hover{transform:translateY(-3px);background:rgba(255,255,255,.05)}
+.sig-card svg{width:100%;height:130px;position:relative;z-index:1}
+.sig-name{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.05rem;margin-top:.3rem;min-height:2.2em;letter-spacing:-.3px}
+.sig-desc{font-size:.74rem;color:var(--muted);font-weight:300}
+.sig-card .hidden-label{filter:blur(6px);transition:.25s}
+.sig-card.revealed .hidden-label{filter:none}
+
+footer{border-top:1px solid rgba(255,255,255,.1);margin-top:2rem;padding:2rem 1.2rem;font-size:.8rem;color:var(--muted);max-width:1020px;margin-left:auto;margin-right:auto;font-weight:300;position:relative;z-index:1}
+footer h4{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.3rem;color:#fff;margin-bottom:.5rem;font-weight:400}
+footer li{margin:.25rem 0 .25rem 1.2rem}
+
+.next-btn{display:flex;justify-content:space-between;margin-top:2.4rem;gap:.6rem;flex-wrap:wrap}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-6.5rem;min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:#000}
+.hero video{position:absolute;left:50%;top:0;transform:translateX(-50%);width:120%;height:120%;object-fit:cover;object-position:top;z-index:0;opacity:0}
+.hero-inner{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 1.2rem 2rem}
+.hero-badge{border-radius:9999px;display:inline-flex;align-items:center;gap:.7rem;padding:.3rem;margin-bottom:1.6rem}
+.hero-badge .chip{background:#fff;color:#000;border-radius:9999px;padding:.2rem .8rem;font-size:.72rem;font-weight:600;position:relative;z-index:1}
+.hero-badge .btxt{font-size:.85rem;color:rgba(255,255,255,.9);padding-right:.9rem;position:relative;z-index:1}
+.hero h1{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:clamp(3rem,8vw,5.2rem);letter-spacing:-4px;line-height:.9;color:#fff;max-width:16ch;display:flex;flex-wrap:wrap;justify-content:center;row-gap:.08em}
+.hero h1 span{display:inline-block;margin-right:.24em}
+.hero-sub{margin-top:1.1rem;font-size:.95rem;color:#fff;max-width:56ch;font-weight:300;line-height:1.45}
+.hero-ctas{display:flex;align-items:center;gap:1.5rem;margin-top:1.6rem}
+.btn-bare{background:none;border:none;color:#fff;font-size:.9rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;font-family:'Barlow',sans-serif}
+.hero-stats{display:flex;align-items:stretch;gap:1rem;margin-top:2.2rem;flex-wrap:wrap;justify-content:center}
+.stat{border-radius:1.25rem;padding:1.15rem 1.25rem;width:210px;text-align:left;display:flex;flex-direction:column;justify-content:flex-end;min-height:120px}
+.stat-num{font-family:'Instrument Serif',serif;font-style:italic;font-size:2.4rem;letter-spacing:-1px;line-height:1;position:relative;z-index:1}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.85);font-weight:300;margin-top:.45rem;position:relative;z-index:1}
+.hero-sources{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1rem;padding-bottom:2.2rem}
+.chip-row{border-radius:9999px;padding:.3rem 1rem;font-size:.74rem;font-weight:500;color:#fff}
+.source-names{display:flex;gap:2.6rem;flex-wrap:wrap;justify-content:center}
+.source-names span{font-family:'Instrument Serif',serif;font-style:italic;font-size:1.5rem;letter-spacing:-.5px;color:#fff}
+
+@media(max-width:640px){
+  nav#topnav{padding:0 .8rem}
+  .nav-logo,.nav-spacer{display:none}
+  .hero h1{letter-spacing:-2px}
+  .source-names{gap:1.2rem}
+  .source-names span{font-size:1.15rem}
+}
+
+/* ---------- Modul-Header-Banner (V3) ---------- */
+.mod-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-6.5rem;min-height:48vh;
+  background-size:cover;background-position:center;background-color:#000;display:flex;align-items:flex-end;overflow:hidden}
+.mod-hero::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.05) 40%,rgba(0,0,0,.82) 82%,#000 100%)}
+.mod-hero-inner{position:relative;z-index:2;max-width:1020px;width:100%;margin:0 auto;padding:5rem 1.2rem 1.8rem}
+.mod-hero-inner .kicker{margin-bottom:.4rem}
+.mod-hero-inner h2{font-size:clamp(2.6rem,6vw,4.2rem);letter-spacing:-2px;margin-bottom:0;text-shadow:0 2px 30px rgba(0,0,0,.55)}
+.mod-hero + .lead, .mod-hero + p.lead{margin-top:1.2rem}
+.hero img{position:absolute;left:50%;top:0;transform:translateX(-50%);width:120%;height:120%;object-fit:cover;object-position:top;z-index:0;opacity:0}
+.hero::before{content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(0,0,0,.30) 0%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.72) 100%)}
+
+/* ---------- V4: statische Vollbild-Hintergruende ---------- */
+#pageBgA,#pageBgB{position:fixed;inset:0;z-index:-2;background-size:cover;background-position:center top;opacity:0;transition:opacity .9s ease;pointer-events:none}
+#pageScrim{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.32) 0%,rgba(0,0,0,.52) 45%,rgba(0,0,0,.70) 100%)}
+.mod-hero{background:none !important;min-height:38vh}
+.mod-hero::after{display:none}
+.mod-hero-inner h2{text-shadow:0 2px 34px rgba(0,0,0,.85)}
+#revealCanvas{position:absolute;left:0;top:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hero::before{background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,.10) 45%,rgba(0,0,0,.62) 100%)}
 </style>
 </head>
-<body class="bg-black">
-<div id="root"></div>
+<body>
+<div id="pageBgA"></div><div id="pageBgB"></div><div id="pageScrim"></div>
 
-<!-- ============ Icons ============ -->
-<script type="text/babel" data-presets="react">
-  const ArrowUpRight = ({ className }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17L17 7" />
-      <path d="M7 7h10v10" />
-    </svg>
-  );
-  window.ArrowUpRight = ArrowUpRight;
+<nav id="topnav">
+  <div class="nav-logo"><span>b</span></div>
+  <div class="nav-links">
+    <button data-mod="start" class="active">Start</button>
+    <button data-mod="regeln">Spielregeln</button>
+    <button data-mod="positionen">Positionen</button>
+    <button data-mod="techniken">Techniken</button>
+    <button data-mod="taktik">Taktik</button>
+    <button data-mod="zeichen">Handzeichen</button>
+    <button data-mod="quiz" class="nav-cta">Quiz starten ↗</button>
+  </div>
+  <div class="nav-spacer"></div>
+</nav>
 
-  const PlayIcon = ({ className }) => (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeLinejoin="round">
-      <polygon points="6 4 20 12 6 20 6 4" />
-    </svg>
-  );
-  window.PlayIcon = PlayIcon;
-
-  const ClockIcon = ({ className }) => (
-    <svg className={className} width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-  window.ClockIcon = ClockIcon;
-
-  const GlobeIcon = ({ className }) => (
-    <svg className={className} width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <line x1="2" y1="12" x2="22" y2="12" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
-  );
-  window.GlobeIcon = GlobeIcon;
-</script>
-
-<!-- ============ FadingVideo ============ -->
-<script type="text/babel" data-presets="react">
-  const FADE_MS = 500;
-  const FADE_OUT_LEAD = 0.55;
-
-  const FadingVideo = ({ src, className, style }) => {
-    const videoRef = React.useRef(null);
-    const rafRef = React.useRef(null);
-    const fadingOutRef = React.useRef(false);
-
-    React.useEffect(() => {
-      const video = videoRef.current;
-      if (!video) return;
-
-      const fadeTo = (target, duration = FADE_MS) => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        const start = parseFloat(video.style.opacity || "0");
-        const t0 = performance.now();
-        const step = (now) => {
-          const p = Math.min((now - t0) / duration, 1);
-          video.style.opacity = String(start + (target - start) * p);
-          if (p < 1) rafRef.current = requestAnimationFrame(step);
-        };
-        rafRef.current = requestAnimationFrame(step);
-      };
-
-      const onLoadedData = () => {
-        video.style.opacity = "0";
-        video.play().catch(() => {});
-        fadeTo(1);
-      };
-
-      const onTimeUpdate = () => {
-        if (
-          !fadingOutRef.current &&
-          video.duration &&
-          video.duration - video.currentTime <= FADE_OUT_LEAD &&
-          video.duration - video.currentTime > 0
-        ) {
-          fadingOutRef.current = true;
-          fadeTo(0);
-        }
-      };
-
-      const onEnded = () => {
-        video.style.opacity = "0";
-        setTimeout(() => {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-          fadingOutRef.current = false;
-          fadeTo(1);
-        }, 100);
-      };
-
-      video.addEventListener("loadeddata", onLoadedData);
-      video.addEventListener("timeupdate", onTimeUpdate);
-      video.addEventListener("ended", onEnded);
-
-      return () => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        video.removeEventListener("loadeddata", onLoadedData);
-        video.removeEventListener("timeupdate", onTimeUpdate);
-        video.removeEventListener("ended", onEnded);
-      };
-    }, [src]);
-
-    return (
-      <video
-        ref={videoRef}
-        src={src}
-        autoPlay
-        muted
-        playsInline
-        preload="auto"
-        className={className}
-        style={{ opacity: 0, ...style }}
-      />
-    );
-  };
-  window.FadingVideo = FadingVideo;
-</script>
-
-<!-- ============ BlurText ============ -->
-<script type="text/babel" data-presets="react">
-  const { motion } = window.Motion || window.FramerMotion;
-
-  const BlurText = ({ text, className }) => {
-    const ref = React.useRef(null);
-    const [inView, setInView] = React.useState(false);
-
-    React.useEffect(() => {
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setInView(true);
-            obs.disconnect();
-          }
-        },
-        { threshold: 0.1 }
-      );
-      if (ref.current) obs.observe(ref.current);
-      return () => obs.disconnect();
-    }, []);
-
-    const words = text.split(" ");
-    const stepDuration = 0.35;
-
-    return (
-      <p
-        ref={ref}
-        className={className}
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", rowGap: "0.1em" }}
-      >
-        {words.map((word, i) => (
-          <motion.span
-            key={i}
-            style={{ display: "inline-block", marginRight: "0.28em" }}
-            initial={{ filter: "blur(10px)", opacity: 0, y: 50 }}
-            animate={
-              inView
-                ? {
-                    filter: ["blur(10px)", "blur(5px)", "blur(0px)"],
-                    opacity: [0, 0.5, 1],
-                    y: [50, -5, 0],
-                  }
-                : {}
-            }
-            transition={{
-              duration: stepDuration * 2,
-              times: [0, 0.5, 1],
-              ease: "easeOut",
-              delay: (i * 100) / 1000,
-            }}
-          >
-            {word}
-          </motion.span>
-        ))}
-      </p>
-    );
-  };
-  window.BlurText = BlurText;
-</script>
-
-<!-- ============ Navbar ============ -->
-<script type="text/babel" data-presets="react">
-  const { ArrowUpRight } = window;
-
-  const Navbar = () => (
-    <header className="fixed top-4 left-0 right-0 z-50 px-8 lg:px-16">
-      <div className="flex items-center justify-between">
-        {/* Logo */}
-        <div className="liquid-glass rounded-full w-12 h-12 flex items-center justify-center">
-          <span className="font-heading italic text-white text-2xl lowercase leading-none">a</span>
-        </div>
-
-        {/* Center links (desktop) */}
-        <div className="hidden md:flex items-center gap-2">
-          <nav className="liquid-glass rounded-full px-1.5 py-1.5 flex items-center">
-            {["Home", "Voyages", "Worlds", "Innovation", "Plan Launch"].map((label) => (
-              <a key={label} href="#" className="px-3 py-2 text-sm font-medium text-white/90 font-body">
-                {label}
-              </a>
-            ))}
-            <button className="bg-white text-black rounded-full px-4 py-2 text-sm font-medium font-body flex items-center gap-1.5 whitespace-nowrap">
-              Claim a Spot
-              <ArrowUpRight className="h-4 w-4" />
-            </button>
-          </nav>
-        </div>
-
-        {/* Spacer to balance the logo */}
-        <div className="w-12 h-12 invisible" />
+<main>
+<!-- ================= MODUL: START ================= -->
+<section class="module active" id="mod-start">
+  <div class="hero">
+    <img id="bgimg" src="img/start.jpg" alt="Leere Basketball-Arena">
+    <canvas id="revealCanvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-badge blur-in">
+        <span class="chip">Prüfung</span>
+        <span class="btxt">Praxis: Mi, 22.07.2026 · Theorie: 60-Min-Klausur oder 10 Min mündlich</span>
       </div>
-    </header>
-  );
-  window.Navbar = Navbar;
-</script>
-
-<!-- ============ Hero ============ -->
-<script type="text/babel" data-presets="react">
-  const { motion } = window.Motion || window.FramerMotion;
-  const { FadingVideo, BlurText, Navbar, ArrowUpRight, PlayIcon, ClockIcon, GlobeIcon } = window;
-
-  const fadeUp = (delay) => ({
-    initial: { filter: "blur(10px)", opacity: 0, y: 20 },
-    animate: { filter: "blur(0px)", opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut", delay },
-  });
-
-  const StatCard = ({ icon, value, label }) => (
-    <div className="liquid-glass rounded-[1.25rem] p-5 w-[220px] flex flex-col justify-between">
-      <div className="text-white">{icon}</div>
-      <div className="mt-8">
-        <div className="font-heading italic text-white text-4xl tracking-[-1px] leading-none">{value}</div>
-        <div className="text-xs text-white font-body font-light mt-2">{label}</div>
+      <h1 id="heroTitle">Prüfungsleistung Basketball</h1>
+      <p class="hero-sub blur-in" style="animation-delay:.8s">Dein Lernpfad durch „Basketball – Das Praxisbuch“ (Kolb 2025): Spielregeln, Techniken, Taktik und Schiedsrichterzeichen – interaktiv, belegt und entlang des Seminarplans aufgebaut.</p>
+      <div class="hero-ctas blur-in" style="animation-delay:1.1s">
+        <button class="btn" onclick="goMod('regeln')">Lernpfad starten&nbsp; ↗</button>
+        <button class="btn-bare" onclick="goMod('quiz')">Direkt zum Quiz&nbsp; ▶</button>
+      </div>
+      <div class="hero-stats blur-in" style="animation-delay:1.3s">
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Module entlang des Seminarplans</div></div>
+        <div class="stat"><div class="stat-num">25</div><div class="stat-label">Schiedsrichter-Handzeichen zum Drillen</div></div>
+        <div class="stat"><div class="stat-num">40/60</div><div class="stat-label">Technik / Taktik – Gewichtung der Praxisnote</div></div>
       </div>
     </div>
-  );
+    <div class="hero-sources blur-in" style="animation-delay:1.5s">
+      <div class="chip-row">Basierend auf der Pflichtliteratur der Dozentin &amp; dem DBB-Regelwerk</div>
+      <div class="source-names"><span>Kolb 2025</span><span>DBB 2022</span><span>SportPraxis</span><span>Seminarplan</span></div>
+    </div>
+  </div>
 
-  const Hero = () => (
-    <section className="relative h-screen overflow-hidden bg-black">
-      <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4"
-        className="absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top z-0"
-        style={{ width: "120%", height: "120%" }}
-      />
+  <span class="kicker">Basketball-Ausbildung · Dozentin: Meike Kolb · SoSe 2026</span>
+  <h2>Dein Wegweiser durch die Theorieprüfung</h2>
+  <p class="lead">Klick dich Modul für Modul durch, deck die Antworten auf und teste dich am Ende im Quiz. Jede Info ist mit Kapitel und Seite belegt – zum Nachschlagen im Buch.</p>
 
-      <div className="relative z-10 flex flex-col h-full">
-        <Navbar />
+  <div class="exam">Die theoretische Prüfung ist eine <b>60-minütige Klausur</b> oder eine <b>10-minütige mündliche Prüfung</b>. Inhalte ergeben sich aus der Lehrveranstaltung – also aus genau den Themen in diesem Guide. Beide Prüfungsteile (Theorie + Praxis) müssen mit mind. <b>4,0</b> bestanden werden; die Gesamtnote ist das arithmetische Mittel.</div>
 
-        {/* Hero content */}
-        <div className="flex-1 flex flex-col items-center justify-center text-center pt-24 px-4">
-          {/* Badge */}
-          <motion.div {...fadeUp(0.4)} className="liquid-glass rounded-full flex items-center gap-3 p-1">
-            <span className="bg-white text-black rounded-full px-3 py-1 text-xs font-semibold font-body">New</span>
-            <span className="text-sm text-white/90 font-body pr-3">Maiden Crewed Voyage to Mars Arrives 2026</span>
-          </motion.div>
-
-          {/* Headline */}
-          <div className="mt-6">
-            <BlurText
-              text="Venture Past Our Sky Across the Universe"
-              className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic text-white leading-[0.8] max-w-2xl justify-center tracking-[-4px]"
-            />
-          </div>
-
-          {/* Subheading */}
-          <motion.p
-            {...fadeUp(0.8)}
-            className="mt-4 text-sm md:text-base text-white max-w-2xl font-body font-light leading-tight"
-          >
-            Discover the universe in ways once unimaginable. Our pioneering vessels and breakthrough
-            engineering bring deep-space exploration within reach—secure and extraordinary.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div {...fadeUp(1.1)} className="flex items-center gap-6 mt-6">
-            <button className="liquid-glass-strong rounded-full px-5 py-2.5 text-sm font-medium text-white font-body flex items-center gap-2">
-              Start Your Voyage
-              <ArrowUpRight className="h-5 w-5" />
-            </button>
-            <button className="text-sm font-medium text-white font-body flex items-center gap-2">
-              View Liftoff
-              <PlayIcon className="h-4 w-4" />
-            </button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div {...fadeUp(1.3)} className="flex items-stretch gap-4 mt-8">
-            <StatCard icon={<ClockIcon />} value="34.5 Min" label="Average Videos Watch Time" />
-            <StatCard icon={<GlobeIcon />} value="2.8B+" label="Users Across the Globe" />
-          </motion.div>
-        </div>
-
-        {/* Partners */}
-        <motion.div {...fadeUp(1.4)} className="flex flex-col items-center gap-4 pb-8">
-          <div className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white font-body">
-            Collaborating with top aerospace pioneers globally
-          </div>
-          <div className="flex items-center gap-12 md:gap-16">
-            {["Aeon", "Vela", "Apex", "Orbit", "Zeno"].map((name) => (
-              <span key={name} className="font-heading italic text-white text-2xl md:text-3xl tracking-tight">
-                {name}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+  <h3>📋 Prüfungsstruktur im Überblick</h3>
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🧠 Theorie</b>
+      <p class="muted">Was erwartet dich?</p>
+      <div class="answer">
+        <p>60&nbsp;Min. Klausur <b>oder</b> 10&nbsp;Min. mündlich. Schwerpunkte seminarspezifisch → Seminarplan = Themenliste (Regeln, Techniken, Individual-/Gruppen-/Mannschaftstaktik, Spielbeobachtung).</p>
       </div>
-    </section>
-  );
-  window.Hero = Hero;
-</script>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🏃 Praxis (40&nbsp;% Technik + 60&nbsp;% Taktik)</b>
+      <p class="muted">Woraus setzt sich die Praxisnote zusammen?</p>
+      <div class="answer">
+        <p><b>Technik (40&nbsp;%)</b> = Mittel aus Wurf-, Dribbling- und Korbleger-Note:</p>
+        <p>• <b>Wurf:</b> 15 Freiwürfe einhändig (Zählung ab 1. Treffer oder nach 2 Fehlwürfen); Note 1,0 ab 13 Treffern, 4,0 bei 4.<br>
+        • <b>Dribbling:</b> Slalom mit <b>zwei Bällen</b>, mind. 6 gleiche Handwechsel pro Bahn (cross/behind/between), Bahn = Halbfeldlänge.<br>
+        • <b>Korbleger:</b> 1&nbsp;Min., abwechselnd von links und rechts, Ecke-Freiwurflinie von innen nach außen umdribbeln; 1,0 ab 13 Treffern.</p>
+        <p><b>Taktik (60&nbsp;%)</b> = 5 gegen 5: Angriff in der vorgegebenen Struktur (individual-, gruppen-, mannschaftstaktisch) + Verteidigung in der <b>sinkenden Man-Man-Verteidigung</b>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="src">Basketball-Prüfungsmodalitäten, Fachleitung Basketball (Sommer 2025), S. 1–3.</div>
 
-<!-- ============ Capabilities ============ -->
-<script type="text/babel" data-presets="react">
-  const { motion } = window.Motion || window.FramerMotion;
-  const { FadingVideo } = window;
+  <h3>🗓️ Seminarplan → Buchkapitel (deine Lernlandkarte)</h3>
+  <table>
+    <tr><th>SE</th><th>Thema</th><th>Buchkapitel (Kolb 2025)</th></tr>
+    <tr><td>01</td><td>Orga + Basketball-Spielregeln</td><td>Kap. 2</td></tr>
+    <tr><td>02</td><td>Techniken im Angriff: Korbleger, Dribbling, Wurf, Passen · Spiel 1×1+1</td><td>Kap. 4</td></tr>
+    <tr><td>04</td><td>Individualtaktik & Technik Verteidigung: Krabben-Technik · Center-Moves</td><td>Kap. 3; 4.5; 5.1.4; 5.1.5</td></tr>
+    <tr><td>05</td><td>Individualtaktik Freilaufen / cut & facing · Gruppentaktik give & go & fill</td><td>Kap. 5.1; 5.2.1</td></tr>
+    <tr><td>06</td><td>Gruppentaktik: Blocken und Abrollen (pick & roll)</td><td>Kap. 5.2.2</td></tr>
+    <tr><td>08</td><td>Theor. Studienleistung: Spielbeobachtung (Abgabe 08.06.2026)</td><td>Kap. 2.6</td></tr>
+    <tr><td>09</td><td>Sinkende Personen-Verteidigung · Turnier 3×3</td><td>Kap. 5.2.4</td></tr>
+    <tr><td>10</td><td>Mannschaftstaktik Angriff: 2-In-3-Out (= 3-Out-2-In)</td><td>Kap. 5.3.2</td></tr>
+    <tr><td>11+13</td><td>Mannschaftstaktik: sinkende Personen-Verteidigung + Vertiefung</td><td>Kap. 5.3.4</td></tr>
+    <tr><td>14</td><td>Abnahme 2. prakt. Studienleistung – Mannschaftstaktik (15.07.2026)</td><td>–</td></tr>
+    <tr><td>15</td><td><b>Praktische Prüfung: Mi, 22.07.2026</b></td><td>–</td></tr>
+  </table>
+  <div class="note">Zusätzlich prüfungsrelevant laut Kurs: <b>Schiedsrichter-Handzeichen</b> (→ Modul 5). Das Buch verweist dafür auf Anhang A des DBB-Regelwerks (Kolb 2025, Kap. 2.3, S. 19).</div>
+  <div class="src">BasketballPPP.pdf (Seminarplan-Folien, M. Kolb), Folien 5–7.</div>
 
-  const ICONS = {
-    image: "M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21H5Zm1-4h12l-3.75-5-3 4L9 13l-3 4Z",
-    movie: "M4 6.47 5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.89-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4Z",
-    lightbulb: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1Zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7Z",
+  <h3>✅ Studienleistungen (nicht vergessen!)</h3>
+  <div class="card">
+    <p>1. <b>Theoretisch:</b> Learnweb-Aufgabe „Spielbeobachtung“ – Abgabe bis <b>08.06.2026, 23 Uhr</b> · 2. <b>Praktisch:</b> Teil 1 Lehrprobe (basketballspez. Anleitung) + Teil 2 Mannschaftstaktik im 5 gegen 5 (15.07.2026). Alle Teile im selben Semester bestehen; <b>mind. 80 % aktive Anwesenheit</b>.</p>
+  </div>
+  <div class="src">BasketballPPP.pdf, Folien 6–8.</div>
+
+  <div class="next-btn"><span></span><button class="btn" onclick="goMod('regeln')">Weiter zu Modul 1: Spielregeln →</button></div>
+</section>
+<!-- ================= MODUL: REGELN ================= -->
+<section class="module" id="mod-regeln">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 1 · Kapitel 2 (Kolb 2025) · SE 01</span>
+      <h2>Spielregeln – eine grobe Zusammenfassung</h2>
+    </div>
+  </div>
+  <p class="lead">Zwei Teams à 5 Spieler*innen, Ziel: Ball von oben durch den Ring. Kolb erklärt die Regeln <b>an den Zeitregeln orientiert</b> – genau so lernst du sie hier.</p>
+
+  <h3>🏟️ Das Spielfeld – klick die Elemente an!</h3>
+  <div class="courtbox">
+    <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" id="courtSVG" style="max-width:640px">
+      <rect x="0" y="0" width="640" height="380" rx="10" fill="rgba(255,255,255,.03)"/>
+      <!-- Spielfläche (32x19) -->
+      <rect x="20" y="30" width="600" height="320" fill="none" stroke="#3a4256" stroke-dasharray="5 5"/>
+      <!-- Feld 28x15 => scale 20px/m: 560x300 -->
+      <g id="court">
+        <rect x="40" y="40" width="560" height="300" fill="var(--court)" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="feld"/>
+        <!-- Mittellinie + Kreis -->
+        <line x1="320" y1="40" x2="320" y2="340" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="mitte" style="cursor:pointer"/>
+        <circle cx="320" cy="190" r="36" fill="none" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="mittelkreis" style="cursor:pointer"/>
+        <!-- Zonen (5.80m breit v. Grundlinie = 116px, Zone 4.90m hoch = 98px) -->
+        <g style="cursor:pointer" class="cpart" data-info="zone">
+          <rect x="40" y="141" width="116" height="98" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="3"/>
+          <rect x="484" y="141" width="116" height="98" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="3"/>
+        </g>
+        <!-- Freiwurf-Halbkreise -->
+        <path d="M 156 154 A 36 36 0 0 1 156 226" fill="none" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="fwl" style="cursor:pointer"/>
+        <path d="M 484 154 A 36 36 0 0 0 484 226" fill="none" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="fwl" style="cursor:pointer"/>
+        <!-- 3-Punkte-Linien (6.75m = 135px vom Korb; Korb bei x=72/568) -->
+        <path d="M 40 57 L 59 57 A 135 135 0 0 1 59 323 L 40 323" fill="none" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="drei" style="cursor:pointer"/>
+        <path d="M 600 57 L 581 57 A 135 135 0 0 0 581 323 L 600 323" fill="none" stroke="var(--court-line)" stroke-width="3" class="cpart" data-info="drei" style="cursor:pointer"/>
+        <!-- No-charge Halbkreise (1.25m = 25px) -->
+        <path d="M 72 165 A 25 25 0 0 1 72 215" fill="none" stroke="var(--court-line)" stroke-width="2.5" class="cpart" data-info="nocharge" style="cursor:pointer"/>
+        <path d="M 568 165 A 25 25 0 0 0 568 215" fill="none" stroke="var(--court-line)" stroke-width="2.5" class="cpart" data-info="nocharge" style="cursor:pointer"/>
+        <!-- Körbe -->
+        <g class="cpart" data-info="korb" style="cursor:pointer">
+          <line x1="60" y1="170" x2="60" y2="210" stroke="#fff" stroke-width="4"/>
+          <circle cx="72" cy="190" r="6" fill="none" stroke="var(--orange)" stroke-width="3"/>
+          <line x1="580" y1="170" x2="580" y2="210" stroke="#fff" stroke-width="4"/>
+          <circle cx="568" cy="190" r="6" fill="none" stroke="var(--orange)" stroke-width="3"/>
+        </g>
+      </g>
+      <text x="320" y="22" fill="#9aa5bd" font-size="12" text-anchor="middle">Spielfläche 32 × 19 m (gestrichelt) · Spielfeld 28 × 15 m</text>
+      <text x="320" y="368" fill="#9aa5bd" font-size="12" text-anchor="middle">Klick auf Linien, Zone, Kreise, Korb …</text>
+    </svg>
+    <div class="card" id="courtInfo" style="text-align:left;margin-top:.6rem"><b>👆 Tipp:</b> Klick ein Spielfeld-Element an, um Maße &amp; Regeln zu sehen.</div>
+  </div>
+  <div class="src">Kolb 2025, Kap. 2.2 „Das Spielfeld“, S. 7–11; DBB 2022, S. 11.</div>
+
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Vorfeld vs. Rückfeld – was ist was?</b>
+      <div class="answer"><p>Das <span class="hl">Vorfeld</span> (frontcourt) ist die Hälfte mit dem <b>gegnerischen Korb</b> (Angriff). Das <span class="hl">Rückfeld</span> (backcourt) enthält den eigenen, zu verteidigenden Korb. Das Vorfeld des einen Teams ist also das Rückfeld des anderen. <em>Die Mittellinie gehört zum Rückfeld!</em></p>
+      <div class="src">Kolb 2025, Kap. 2.2, S. 7 f., Abb. 2.2.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Ballseite / ballferne Seite &amp; Distanzen</b>
+      <div class="answer"><p>Die gedachte <span class="hl">Korb-Korb-Linie</span> teilt das Feld längs: Hälfte mit Ball = <b>Ballseite/strong side</b>, ohne Ball = <b>ballferne Seite/weak side/help side</b>. Orientierung außerdem: <b>verlängerte Freiwurflinie</b>. Distanzen: <b>Nahdistanz</b> (an/in der Zone), <b>Mitteldistanz</b> (Zone bis 3-Punkte-Linie), <b>Weitdistanz</b> (hinter der 3-Punkte-Linie).</p>
+      <div class="src">Kolb 2025, Kap. 2.2, S. 9 f., Abb. 2.3–2.5.</div></div>
+    </div>
+  </div>
+
+  <h3>⏱️ Die Zeitregeln – von lang nach kurz (Kolbs Erklär-Logik)</h3>
+  <p class="muted">Klick jede Zeit an. Merke die absteigende Reihe: <b>20 – 15 – 10 – 5 – 2 – 1 – 24s – 8s – 5s – 3s</b>.</p>
+  <div class="grid3" id="timegrid">
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">20 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Spielpause vor Spieleröffnung:</b> Aufwärmen, Besprechung, formale Vorbereitung. Sogar hier können Regelverstöße geahndet werden (z.&nbsp;B. Hängen am Ring).</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">15 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Halbzeitpause</b> (zwischen 2. und 3. Viertel): Besprechung, Regeneration, 2. Aufwärmphase. <span class="hl">Seitenwechsel</span> der Körbe – die Bänke bleiben!</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">10 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Spielviertel</b> – 4 × 10 min effektive (gestoppte!) Spielzeit. Eröffnung des 1. Viertels per <span class="hl">Sprungball</span> im Mittelkreis; jedes weitere Viertel per Einwurf an der verlängerten Mittellinie nach <span class="hl">wechselndem Ballbesitz</span> (Einwurfpfeil).</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">5 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Verlängerung</b> bei Gleichstand – so oft, bis ein Team gewinnt. 1 Auszeit pro Team und Verlängerung; alle Fouls bleiben bestehen (Team-Foul-Konto des 4. Viertels läuft weiter).</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">2 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Viertelpausen</b> (zwischen 1.+2. und 3.+4. Viertel sowie vor jeder Verlängerung): Besprechung, Regeneration, ggf. Wechsel.</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">1 min</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Auszeit (Time-out):</b> 5 pro Spiel – <b>2</b> in der 1. Halbzeit, <b>3</b> in der 2. (davon max. 2 in den letzten 2 Min. des 4. Viertels), 1 pro Verlängerung. Nicht genommene verfallen. Merkhilfe für Coaches: max. <b>3 Informationseinheiten</b> pro Ansage (Kurzzeitgedächtnis, Rouder et al. 2008).</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">24 s</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Wurfzeit (shot clock):</b> Innerhalb 24&nbsp;s muss der Ball abgeworfen sein und danach den <b>Ring berühren</b> oder durch ihn fallen (nur Brett zählt nicht!). Nach Pfiff: Reset auf 24&nbsp;s oder <b>14&nbsp;s</b> – oder die Zeit läuft weiter. Ablauf → Einwurf-Seite für die Gegner.</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">8 s</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Rückfeld-Zeit:</b> In 8&nbsp;s muss der Ball über die Mittellinie ins Vorfeld (Teil der 24&nbsp;s). Danach: <span class="hl">kein Rückspiel</span> („over and back“) – Mittellinie gehört zum Rückfeld! Ahndung: Einwurf-Seite.</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">5 s</b><p class="muted">Gleich 3 Situationen!</p>
+      <div class="answer"><p>① <b>Ballhalten</b> bei enger Verteidigung max. 5&nbsp;s. ② <b>Einwurf:</b> 5&nbsp;s Zeit ab Ballübergabe. ③ <b>Freiwurf:</b> 5&nbsp;s ab Ballübergabe. Außerdem: <b>Halteball</b> (beide ziehen 5&nbsp;s am Ball) → Sprungball-Situation → wechselnder Ballbesitz.</p></div></div>
+    <div class="card reveal"><span class="tap">?</span><b style="font-size:1.4rem">3 s</b><p class="muted">Was passiert hier?</p>
+      <div class="answer"><p><b>Zonen-Regel:</b> Angreifer*innen dürfen sich max. 3 Sekunden in der Zone aufhalten – gilt <b>nicht</b> für die Verteidigung. Ahndung: Einwurf-Seite.</p></div></div>
+  </div>
+  <div class="src">Kolb 2025, Kap. 2.3 „Basketballregeln – an den Zeitregeln orientiert erklärt“, S. 12–19.</div>
+
+  <h3>👟 Schritt- &amp; Dribbelregeln</h3>
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Sternschritt (Pivot) &amp; Schrittfehler</b>
+      <div class="answer"><p>Im Stand: <b>Standfuß</b> bleibt am Boden, <b>Spielfuß</b> darf beliebig oft umgesetzt werden. Beim Abstoppen in der Bewegung wird der <b>erste Fuß mit Bodenkontakt</b> Standfuß; bei gleichzeitiger Landung (Einkontaktstopp) freie Wahl. Standfuß darf sich lösen, aber der Ball muss die Hände verlassen, <b>bevor</b> er wieder aufsetzt. In der Bewegung mit gehaltenem Ball: max. <b>zwei Schritte</b>. Verstoß = <span class="hl">Schrittfehler/Traveling</span>.</p>
+      <div class="src">Kolb 2025, Kap. 2.3, S. 15; Schrittregeln DBB 2022, S. 31 f.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Dribbelregeln: Schaufeln &amp; Doppeldribbling</b>
+      <div class="answer"><p>Dribbeln = Ball mit einer Hand werfen, tippen, rollen oder prellen. Verboten: Ball <b>von unten berühren/zur Ruhe kommen lassen</b> = „Schaufeln“ (Carrying). Beim Dribbling sind <b>beliebig viele Schritte</b> erlaubt. Kommt der Ball in beiden Händen zur Ruhe, darf nicht erneut gedribbelt werden = <span class="hl">Doppeldribbling</span> → Einwurf-Seite.</p>
+      <div class="src">Kolb 2025, Kap. 2.3, S. 15 u. Kap. 4.2 (Regelzitat DBB 2022, Art. 24, S. 30 ff.).</div></div>
+    </div>
+  </div>
+
+  <h3>🚨 Fouls – das Zylinderprinzip</h3>
+  <div class="card">
+    <p>Jede Person hat einen eigenen <span class="hl">zylindrischen Raum</span>: begrenzt durch Knie-Fuß-Achse und die Ellenbogen bei angewinkelten Armen, nach oben offen. Wer den eigenen Zylinder verlässt und Kontakt verursacht, foult – auch in der Luft. Legale Verteidigungsposition: beide Füße am Boden, frontal gegenüber (oder senkrecht hochspringend). Auch der Angriff kann foulen (<b>Offensiv-Foul</b>, z.&nbsp;B. Wegschubsen). Ausnahme unter dem Korb: im <b>No-Charge-Halbkreis</b> wird dem Angreifer kein Rempel-Foul in der Luft gepfiffen.</p>
+    <div class="src">Kolb 2025, Kap. 2.3, S. 16–19, Abb. 2.7.</div>
+  </div>
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Die 4 Foularten + Ahndung</b>
+      <div class="answer">
+        <table>
+          <tr><th>Foul</th><th>Was?</th><th>Ahndung</th></tr>
+          <tr><td><b>Persönlich</b></td><td>Kontakt: Blockieren, Halten, Stoßen (Pushing), Rempeln (Charging)</td><td>Einwurf; beim Wurf-Foul Freiwürfe nach möglichem Punktwert (2/3, bei Treffer +1 Bonus)</td></tr>
+          <tr><td><b>Technisch</b></td><td>Fehlverhalten ohne Kontakt (Beleidigung, Respektlosigkeit, am Ring hängen)</td><td>1 Freiwurf, dann weiter an der Unterbrechungsstelle</td></tr>
+          <tr><td><b>Unsportlich</b></td><td>Übertrieben harter/unnötiger Kontakt, kein Spiel auf den Ball</td><td>2 Freiwürfe + Einwurf im Vorfeld</td></tr>
+          <tr><td><b>Disqualifizierend</b></td><td>Grob unsportliches Verhalten</td><td>Halle verlassen! 2 Freiwürfe + Einwurf im Vorfeld</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Foul-Limits &amp; Mannschaftsfouls</b>
+      <div class="answer"><p>• <b>5 persönliche Fouls</b> → Auswechslung, Rest des Spiels Bank.<br>
+      • <b>2 technische</b> oder <b>2 unsportliche</b> oder <b>1 technisches + 1 unsportliches</b> → ebenfalls raus.<br>
+      • <b>Mannschaftsfouls:</b> ab dem <b>5. Teamfoul pro Viertel</b> gibt es für jedes weitere Foul 2 Freiwürfe (außer es war ohnehin ein Foul an der werfenden Person). Reset nach jedem Viertel, <em>nicht</em> in der Verlängerung.<br>
+      • <b>Punkte:</b> Freiwurf = 1, im 2-Punkte-Bereich = 2, hinter der 3-Punkte-Linie = 3; Treffer trotz Foul → +1 Bonusfreiwurf (max. 4 Punkte möglich).</p></div>
+    </div>
+  </div>
+  <div class="src">Kolb 2025, Kap. 2.3, S. 18 f.; Definition disqualifizierendes Foul: DBB 2022, Art. 38.1.1, S. 46.</div>
+
+  <h3>🎯 Freiwurf-Aufstellung (Klick-Animation)</h3>
+  <div class="courtbox">
+    <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="max-width:440px">
+      <rect x="10" y="10" width="400" height="280" fill="var(--court)" rx="8"/>
+      <line x1="10" y1="150" x2="60" y2="150" stroke="#fff" stroke-width="0"/>
+      <!-- Grundlinie links, Korb -->
+      <line x1="30" y1="20" x2="30" y2="280" stroke="var(--court-line)" stroke-width="3"/>
+      <line x1="46" y1="128" x2="46" y2="172" stroke="#fff" stroke-width="4"/>
+      <circle cx="56" cy="150" r="6" fill="none" stroke="var(--orange)" stroke-width="3"/>
+      <!-- Zone -->
+      <rect x="30" y="105" width="120" height="90" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2.5"/>
+      <path d="M150 115 A 35 35 0 0 1 150 185" fill="none" stroke="var(--court-line)" stroke-width="2.5"/>
+      <path d="M 30 40 L 48 40 A 128 128 0 0 1 48 260 L 30 260" fill="none" stroke="var(--court-line)" stroke-width="2.5"/>
+      <!-- Markierungen an der Zone -->
+      <g stroke="var(--court-line)" stroke-width="2">
+        <line x1="52" y1="105" x2="52" y2="98"/><line x1="76" y1="105" x2="76" y2="98"/><line x1="106" y1="105" x2="106" y2="98"/><line x1="136" y1="105" x2="136" y2="98"/>
+        <line x1="52" y1="195" x2="52" y2="202"/><line x1="76" y1="195" x2="76" y2="202"/><line x1="106" y1="195" x2="106" y2="202"/><line x1="136" y1="195" x2="136" y2="202"/>
+      </g>
+      <!-- Spieler -->
+      <g id="ftPlayers" opacity="0">
+        <circle cx="63" cy="88" r="10" fill="#c58ad7"/><text x="63" y="92" font-size="10" text-anchor="middle" fill="#fff">V</text>
+        <circle cx="90" cy="88" r="10" fill="var(--accent)"/><text x="90" y="92" font-size="10" text-anchor="middle" fill="#111">A</text>
+        <circle cx="121" cy="88" r="10" fill="#c58ad7"/><text x="121" y="92" font-size="10" text-anchor="middle" fill="#fff">V</text>
+        <circle cx="63" cy="212" r="10" fill="#c58ad7"/><text x="63" y="216" font-size="10" text-anchor="middle" fill="#fff">V</text>
+        <circle cx="90" cy="212" r="10" fill="var(--accent)"/><text x="90" y="216" font-size="10" text-anchor="middle" fill="#111">A</text>
+        <circle cx="160" cy="150" r="11" fill="var(--orange)"/><text x="160" y="154" font-size="10" text-anchor="middle" fill="#fff">W</text>
+      </g>
+      <text x="230" y="30" fill="#9aa5bd" font-size="11">W = Werfer*in (hinter FWL)</text>
+      <text x="230" y="46" fill="#9aa5bd" font-size="11">V = Verteidigung (korbnah + FWL-nah)</text>
+      <text x="230" y="62" fill="#9aa5bd" font-size="11">A = Angriff (mittlere Plätze)</text>
+      <text x="230" y="86" fill="#9aa5bd" font-size="11">Alle anderen: hinter 3-Pkt-Linie</text>
+      <text x="230" y="100" fill="#9aa5bd" font-size="11">und verlängerter FWL</text>
+    </svg>
+    <div class="btnrow" style="justify-content:center"><button class="btn small" onclick="document.getElementById('ftPlayers').style.opacity=1">Aufstellung einblenden</button><button class="btn small ghost" onclick="document.getElementById('ftPlayers').style.opacity=0">zurücksetzen</button></div>
+    <p class="muted">Max. 5 weitere Spieler*innen an der Zone (max. 3 pro Team inkl. Werfer*in an der Zone). Korbnächste + korbfernste Plätze: Verteidigung. Werfer*in verlässt Position erst, wenn der Ball Ring berührt/trifft; kein Antäuschen; letzter Freiwurf muss den Ring berühren (sonst Einwurf-Seite, Stichwort „Airball“).</p>
+  </div>
+  <div class="src">Kolb 2025, Kap. 2.3, S. 15 f., Abb. 2.6.</div>
+
+  <h3>🧒 Minibasketball &amp; Materialien</h3>
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Wichtige Regelunterschiede Minibasketball (U8–U12)</b>
+      <div class="answer"><p>• Spielzeit <b>8 × 5 min</b> (U8: 8 × 4) · <b>4 gegen 4</b> (U8: 3 gegen 3)<br>
+      • Korbhöhe <b>2,60 m</b> · Freiwürfe näher am Korb<br>
+      • Würfe außerhalb der Zone zählen schon <b>3 Punkte</b><br>
+      • <b>Keine</b> 3-, 5-, 8-, 24-Sekunden-Regeln · keine Auszeiten<br>
+      • Alle Kinder müssen eingesetzt werden · Doppeln &amp; Blöcke untersagt<br>
+      • Unentschieden möglich; Verlängerung 3 min · keine Ballübergabe bei Einwurf</p>
+      <div class="src">Kolb 2025, Kap. 2.5, S. 20 (nach DBB 2024).</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Ballgrößen – wer spielt womit?</b>
+      <div class="answer"><table>
+        <tr><th>Größe</th><th>Spielgruppe</th></tr>
+        <tr><td><b>5</b></td><td>bis einschließlich U12</td></tr>
+        <tr><td><b>6</b></td><td>U14 generell + Frauenbereich</td></tr>
+        <tr><td><b>7</b></td><td>Männerbereich ab U16</td></tr>
+        <tr><td><b>6*</b></td><td>FIBA 3×3 („Unisex-Ball“: Größe 6, Gewicht wie 7)</td></tr>
+      </table>
+      <div class="src">Kolb 2025, Kap. 2.4, S. 19.</div></div>
+    </div>
+  </div>
+
+  <h3>📊 Spielbeobachtung &amp; -analyse (Studienleistung SE 08!)</h3>
+  <div class="card reveal"><span class="tap">aufdecken</span>
+    <b>Welche Statistik-Kategorien &amp; Instrumente gibt es?</b>
+    <div class="answer">
+      <p>In höheren Ligen sind <b>Scouts</b> vorgeschrieben; Kriterien seit 2008 im <b>Scouting-Manual</b> (FIBA 2024). Erfasst werden pro Person:</p>
+      <p><span class="badge o">Assists</span> Pässe direkt zum Korberfolg · <span class="badge o">Steals</span> Ballgewinne · <span class="badge o">Turnovers</span> Ballverluste · <span class="badge o">Blocks</span> Wurfblocks · <span class="badge o">Fouls</span> · <span class="badge o">Free Throws</span> · <span class="badge o">Field Goals</span> Würfe · <span class="badge o">Rebounds</span></p>
+      <p>In unteren Ligen: eigene Statistiken über den <b>Spielberichtsbogen</b>, erweitert durch <b>Wurfskizzen</b> (jeder Wurfversuch am Wurfort eingezeichnet, Treffer/Fehlwurf unterschiedlich markiert, Freiwürfe &amp; Korbleger li/re als Strichliste) und <b>Videoanalysen</b>. Wurfskizzen zeigen z.&nbsp;B., dass fast nur über rechts abgeschlossen wird → Übungsbedarf links.</p>
+      <div class="src">Kolb 2025, Kap. 2.6, S. 20 f.</div>
+    </div>
+  </div>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('start')">← Start</button><button class="btn" onclick="goMod('positionen')">Weiter: Spielpositionen →</button></div>
+</section>
+<!-- ================= MODUL: POSITIONEN ================= -->
+<section class="module" id="mod-positionen">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 2 · Kapitel 3 (Kolb 2025) · SE 04</span>
+      <h2>Spielpositionen</h2>
+    </div>
+  </div>
+  <p class="lead">Drei Grundpositionen im Raum: <b>Aufbau, Flügel, Center</b> – daraus entstehen die Grundaufstellungen. Schalte unten zwischen ihnen um!</p>
+
+  <h3>🗺️ Grundaufstellungen im Halbfeld</h3>
+  <div class="courtbox">
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn small" id="f122" onclick="setFormation('122')">1-2-2</button>
+      <button class="btn small ghost" id="f131" onclick="setFormation('131')">1-3-1</button>
+      <button class="btn small ghost" id="f14" onclick="setFormation('14')">1-4</button>
+      <button class="btn small ghost" id="f32" onclick="setFormation('32')">3-Out-2-In</button>
+    </div>
+    <svg viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg" style="max-width:420px">
+      <rect x="10" y="10" width="380" height="320" fill="var(--court)" rx="8"/>
+      <!-- Halbfeld: Grundlinie oben -->
+      <line x1="10" y1="20" x2="390" y2="20" stroke="var(--court-line)" stroke-width="3"/>
+      <line x1="146" y1="20" x2="146" y2="150" stroke="var(--court-line)" stroke-width="2.5" opacity="0"/>
+      <rect x="151" y="20" width="98" height="116" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2.5"/>
+      <path d="M 165 136 A 35 35 0 0 0 235 136" fill="none" stroke="var(--court-line)" stroke-width="2.5"/>
+      <line x1="178" y1="34" x2="222" y2="34" stroke="#fff" stroke-width="4"/>
+      <circle cx="200" cy="46" r="6" fill="none" stroke="var(--orange)" stroke-width="3"/>
+      <path d="M 30 20 L 30 40 A 170 170 0 0 0 370 40 L 370 20" fill="none" stroke="var(--court-line)" stroke-width="2.5"/>
+      <g id="formPlayers"></g>
+      <text x="200" y="325" fill="#6b7280" font-size="11" text-anchor="middle" id="formCaption"></text>
+    </svg>
+    <div class="card" style="text-align:left" id="formInfo"></div>
+  </div>
+  <p class="muted">Lesart der Zahlen: von der Mittellinie zum Korb blickend – erst Aufbauhöhe, dann Freiwurflinienhöhe, dann Korbbrettlinie. Alle Kombinationen mit Summe 5 sind denkbar. Die 1-4 erzeugt einen freien Raum unter dem Korb (<span class="hl">„clear out“</span>) für 1-gegen-1.</p>
+  <div class="src">Kolb 2025, Kap. 3, S. 23–26, Abb. 3.1–3.4.</div>
+
+  <h3>🎽 Die fünf Spieler*innen-Positionen</h3>
+  <div class="warn"><b>Achtung – Buchversion lernen!</b> Das Buch listet: <b>1 = Shooting Guard/Aufbauspieler*in, 2 = Point Guard/kleine*r Flügelspieler*in</b> (Kolb 2025, Kap. 3, S. 25). International üblich ist die umgekehrte Benennung (1 = Point Guard als Aufbau). Für die Klausur zählt die Version der Dozentin – die Aufgabenbeschreibungen sind aber identisch.</div>
+  <div class="grid3">
+    <div class="flip-wrap"><div class="flip">
+      <div class="face front"><b style="font-size:2rem;color:var(--orange)">1</b><b>Aufbauspieler*in</b><p class="muted">(Buch: Shooting Guard)</p></div>
+      <div class="face back"><p><b>„Kopf“ der Mannschaft</b> – bester Spielüberblick von der Mitte. Braucht: herausragende Ballkoordination, Dribbel-, Pass- und Fernwurffähigkeiten, schnelle Entscheidungen. Aufgaben: sicherer Ballvortrag, Mitspieler*innen einsetzen, Angriffssicherung, Ansage der Aufstellungen.</p></div>
+    </div></div>
+    <div class="flip-wrap"><div class="flip">
+      <div class="face front"><b style="font-size:2rem;color:var(--orange)">2 · 3</b><b>Flügel (Wings)</b><p class="muted">kleine*r / große*r Flügel</p></div>
+      <div class="face back"><p>Verbindung zwischen Aufbau und tiefem Center. <b>Besserer Passwinkel auf den Center</b> als vom Aufbau, kürzere Pässe in die Bewegung. Müssen selbst per Korbleger und Distanzwurf punkten und sicher in Zone/Post passen. 2 = eher Aufbau-Eigenschaften, 3 = eher Center-Eigenschaften.</p></div>
+    </div></div>
+    <div class="flip-wrap"><div class="flip">
+      <div class="face front"><b style="font-size:2rem;color:var(--orange)">4 · 5</b><b>Center</b><p class="muted">Power Forward / Center</p></div>
+      <div class="face back"><p>Setzen sich unter dem Korb durch (große, sprungstarke Personen). Aufgaben: <b>Rebounds + Nahdistanz-Würfe</b>. Wenig Dribbling; großräumige, kraftvolle Bewegungen mit Körperkontakt (<b>power moves</b>). High Post = an der FWL, Low Post = am Zonenrand auf Korbbrettlinie. 4 hat zusätzlich Flügel-Eigenschaften, 5 spielt rein innen.</p></div>
+    </div></div>
+  </div>
+
+  <div class="card reveal"><span class="tap">aufdecken</span>
+    <b>Trend: Innen- vs. Außenspieler*innen</b>
+    <div class="answer"><p>Basketball entwickelt sich weg von starrer Positions-Spezialisierung. Gruppierung stattdessen: <b>Außenspieler*innen</b> (hinter der 3-Punkte-Linie; Aufbau-/Flügeleigenschaften) und <b>Innenspieler*innen</b> (an der Zone / im 2-Punkte-Bereich; Centereigenschaften). „3 out – 2 in“ entspricht der 1-2-2 mit Centern auf der Low-Post-Position; je nach Kader auch „2 out – 3 in“ oder „4 out – 1 in“.</p>
+    <div class="src">Kolb 2025, Kap. 3, S. 26.</div></div>
+  </div>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('regeln')">← Spielregeln</button><button class="btn" onclick="goMod('techniken')">Weiter: Techniken →</button></div>
+</section>
+<!-- ================= MODUL: TECHNIKEN ================= -->
+<section class="module" id="mod-techniken">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 3 · Kapitel 4 (Kolb 2025) · SE 02 + 04</span>
+      <h2>Techniken</h2>
+    </div>
+  </div>
+  <p class="lead">„Techniken sind alle Bewegungsformen des Körpers, die den Ball kontrolliert bewegen, den Ballerhalt vorbereiten und zur Abwehr des Balles umgesetzt werden“ (Kolb 2025, Kap. 4). Grundlage von allem: die <b>Ballkoordination</b> und die <b>ready-position</b>.</p>
+
+  <h3>🧍 Grundstellung: ready-position</h3>
+  <div class="grid2">
+    <div class="card">
+      <p><b>So geht's:</b> Aus maximal schulterbreitem Stand die Hüfte nach <b>hinten-unten</b> absenken – „auf einen imaginären Sessel setzen“. Knie bleiben <b>hinter den Fußspitzen</b>, zeigen leicht nach außen (Gelenkschonung!). Oberkörper aufrecht. Stabilisiert durch Oberschenkel-, Gesäß- und Rückenmuskulatur.</p>
+      <p><b>Warum?</b> Muskuläre <span class="hl">Vorspannung</span> → sofort handlungsfähig: passen, werfen, dribbeln, verteidigen. Mit Ball = zugleich Wurfauslage („shot-pass-dribble-position“).</p>
+      <p class="muted">Übung: „In den Sessel setzen“ an der Wand · Spielform „Wadenklatschen“ · Ritual „Are you ready?“ – „Ready!“</p>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>Abstoppen &amp; Sternschritt – die Regeln der Füße</b>
+      <div class="answer"><p><b>Abstoppen:</b> flach, Beine gebeugt, tiefer Körperschwerpunkt. <b>Einkontaktstopp</b> (beide Füße gleichzeitig → freie Standbeinwahl!) oder <b>Zweikontaktstopp</b> (nacheinander → erster Fuß = Standfuß). Schritt- oder Parallelstellung.</p>
+      <p><b>Sternschritt (Pivot):</b> Standfuß bleibt am Boden (Drehen auf dem Ballen erlaubt), Spielfuß beliebig oft in alle Richtungen umsetzen. Standbein darf innerhalb der Ballbesitzphase <b>nicht gewechselt</b> werden. Vor dem Abheben des Standfußes muss der Ball die Hand verlassen (Dribbling, Pass oder Wurf) – sonst Schrittfehler.</p>
+      <div class="src">Kolb 2025, Kap. 4.1.3 + 4.1.4, S. 37–40, Abb. 4.2–4.4.</div></div>
+    </div>
+  </div>
+
+  <h3>⛹️ Dribbeltechniken</h3>
+  <div class="card">
+    <p><b>Grundprinzip:</b> kontinuierliches Wegdrücken und „Ansaugen“ des Balles mit einer Hand. Handgelenk klappt impulsiv ab, Finger umschließen den Ball krallend, der <b>Handteller berührt den Ball nicht</b>. Impuls immer <b>oberhalb des Balläquators</b> (sonst Schaufeln!). Im Stehen: Impuls von oben, neben dem Körper. Im Lauf: von hinten-oben, seitlich vor dem Körper. Ballferner Arm schützt, ballferne Schulter zum Gegner = „Schutzschild“.</p>
+    <p class="exam" style="margin-top:.6rem">Durchführungsregel: <b>„Dribbele mit der rechten Hand nach rechts und mit der linken Hand nach links!“</b> – immer mit der gegner*in-fernen Hand.</p>
+    <p><b>Zwei Grundformen:</b> <span class="hl">Passgangdribbling</span> (gleichseitiger Fuß zur Dribbelhand macht den Schritt) und <span class="hl">Kreuzgangdribbling</span> (gegenseitiger Fuß, „crossover“). Je langsamer die Bewegung, desto niedriger und sicherer das Dribbling; im Sprint höher und richtungsgebundener.</p>
+  </div>
+
+  <h4 style="margin-top:1rem;color:var(--accent)">Die 3 Handwechsel – Animation ansehen 👇 (prüfungsrelevant: genau diese 3 sind Teil der Dribbling-Technikprüfung!)</h4>
+  <div class="grid3">
+    <div class="card" style="text-align:center">
+      <b>Cross</b><p class="muted">vor dem Körper</p>
+      <svg viewBox="0 0 140 130">
+        <line x1="55" y1="40" x2="45" y2="95" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <line x1="85" y1="40" x2="95" y2="95" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="70" cy="26" r="11" fill="#9aa5bd"/>
+        <rect x="52" y="38" width="36" height="34" rx="10" fill="#9aa5bd"/>
+        <path id="pCross" d="M 38 60 Q 70 118 102 60" fill="none" stroke="none"/>
+        <circle r="7" fill="var(--orange)"><animateMotion dur="1.6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear"><mpath href="#pCross"/></animateMotion></circle>
+        <text x="70" y="125" font-size="9" fill="#9aa5bd" text-anchor="middle">titscht VOR dem Körper auf</text>
+      </svg>
+      <p class="muted" style="font-size:.78rem">Seitlicher Impuls leicht von hinten; KSP kurz nach unten-hinten. Ideal <b>bei Abstand</b> zur Verteidigung.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <b>Behind</b><p class="muted">hinter dem Rücken</p>
+      <svg viewBox="0 0 140 130">
+        <path id="pBehind" d="M 40 78 Q 70 128 100 78" fill="none" stroke="none"/>
+        <circle r="7" fill="var(--orange)"><animateMotion dur="1.6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear"><mpath href="#pBehind"/></animateMotion></circle>
+        <line x1="55" y1="40" x2="45" y2="95" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <line x1="85" y1="40" x2="95" y2="95" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="70" cy="26" r="11" fill="#9aa5bd"/>
+        <rect x="52" y="38" width="36" height="34" rx="10" fill="#9aa5bd"/>
+        <text x="70" y="125" font-size="9" fill="#9aa5bd" text-anchor="middle">Ball läuft HINTER dem Rücken</text>
+      </svg>
+      <p class="muted" style="font-size:.78rem">Einrollende Handbewegung, Ball bekommt Drall (Spin). Ideal <b>bei Körperkontakt</b>.</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <b>Between</b><p class="muted">durch die Beine</p>
+      <svg viewBox="0 0 140 130">
+        <line x1="55" y1="40" x2="40" y2="98" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <line x1="85" y1="40" x2="100" y2="98" stroke="#9aa5bd" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="70" cy="26" r="11" fill="#9aa5bd"/>
+        <rect x="52" y="38" width="36" height="34" rx="10" fill="#9aa5bd"/>
+        <path id="pBetween" d="M 42 62 Q 70 112 98 62" fill="none" stroke="none"/>
+        <circle r="7" fill="var(--orange)"><animateMotion dur="1.6s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;0.5;1" calcMode="linear"><mpath href="#pBetween"/></animateMotion></circle>
+        <text x="70" y="125" font-size="9" fill="#9aa5bd" text-anchor="middle">titscht ZWISCHEN den Füßen</text>
+      </svg>
+      <p class="muted" style="font-size:.78rem">Kräftiger Impuls leicht von oben auf die Fuß-Fuß-Linie; weiter im Kreuzgang. Auch <b>bei Kontakt</b> erfolgreich.</p>
+    </div>
+  </div>
+  <div class="note">Jeder Handwechsel = <b>Richtungswechsel + Temposteigerung</b>. Zwischen dem Wechsel muss der Ball den Boden berühren – eine Übergabe von Hand zu Hand ist regelwidrig.</div>
+  <div class="src">Kolb 2025, Kap. 4.2, S. 41–50, Tab. 4.1, Abb. 4.5–4.8.</div>
+
+  <h3>🎯 Wurftechniken</h3>
+  <div class="card">
+    <p><b>Einteilung nach der Bewegung vor dem Wurf:</b> <span class="hl">Korbleger</span> (aus dem Lauf) vs. <span class="hl">Positionswürfe</span> (aus dem Stand) – plus <span class="hl">Dunking</span>. Je näher am Korb, desto mehr hilft das Brett; je weiter weg, desto wichtiger die Flugkurve (Arc).</p>
+    <p class="muted">Dunking-Formel: Ringhöhe 3,05 m + Balldurchmesser 0,23 m − Reichhöhe (z. B. 2,20 m) = erforderliche Sprunghöhe (1,08 m).</p>
+  </div>
+  <details><summary>Positionswurf: Standwurf → Sprungwurf (Technikknoten)</summary><div class="inner">
+    <p><b>Wurfauslage (Rechtshänder):</b> ready-position, leichte Schrittstellung, rechter Fuß vorn – Fußspitze unter dem Ellenbogen des Wurfarms. Ellenbogen + Oberkörper zum Korb. Der Wurfarm bildet <b>drei rechte Winkel</b>: Oberarm/Oberkörper, Ellenbogen, Handrücken/Unterarm. Ball liegt auf der Wurfhand, Stützhand sichert <b>seitlich</b>.</p>
+    <p><b>Ablauf:</b> Streckung beginnt in den Beinen → setzt sich über Arm und Hand fort → schnappartiges <b>Abklappen des Handgelenks</b> Richtung Korb (Bild: Schlange, die sich hochschlängelt und zubeißt). Ende: Körper gestreckt, Handgelenk abgeklappt, Fingerspitzen entspannt Richtung Boden.</p>
+    <p><b>Sprungwurf:</b> gleiche Wurftechnik + Absprung; Abwurf <b>am höchsten Punkt der Flugphase</b>; Landung beidbeinig in der ready-position, möglichst am Absprungort.</p>
+    <p><b>Vermittlung:</b> Ganzheits-Lernmethode – Bewusstmachen (Demo/Video) → Werfen im Stehen (Zeitlupe, sich selbst hochwerfen, „Swift“-Netztreffer vom No-Charge-Halbkreis aus, Schritt für Schritt weiter weg) → Werfen mit vorgeschalteten Bewegungen („Wurfmaschine“, „Sternenlauf“).</p>
+    <p><b>Typische Fehler:</b> Stützhand hinterm Ball statt seitlich · Beinstreckung zu kurz/langsam · Streckung nicht fließend · Wurfhand wird weggezogen · Streckung nach vorn statt senkrecht (Ball prallt flach ab).</p>
+    <p class="muted">Wurfspiele: „Auswerfen/Bump“, „Spiel 21“, „Wanderhut“ – und das Zonen-Wurfspiel für alle Könnensstufen.</p>
+    <div class="src">Kolb 2025, Kap. 4.3.1, S. 52–58, Abb. 4.9–4.12.</div>
+  </div></details>
+
+  <details open><summary>Korbleger – Schritt für Schritt (Klick-Animation)</summary><div class="inner">
+    <p>Wurfabschluss <b>aus dem Lauf mit einbeinigem Absprung</b>. Anlauf mit gehaltenem Ball: max. <b>2 Schritte</b> (Schrittregeln). Merkrhythmus von rechts: <b>„0 – 1 – 2“ = links (letztes Dribbling) – rechts – links (Absprung)</b>.</p>
+    <div class="courtbox">
+      <svg viewBox="0 0 560 200" id="layupSVG">
+        <rect x="0" y="0" width="560" height="200" fill="var(--bg2)" rx="10"/>
+        <line x1="20" y1="170" x2="540" y2="170" stroke="#37415a" stroke-width="3"/>
+        <!-- Korb -->
+        <line x1="500" y1="40" x2="500" y2="90" stroke="#fff" stroke-width="5"/>
+        <rect x="478" y="42" width="22" height="18" fill="none" stroke="#9aa5bd" stroke-width="2"/>
+        <line x1="472" y1="90" x2="500" y2="90" stroke="var(--orange)" stroke-width="4"/>
+        <!-- Schritte -->
+        <g id="stepFeet" font-size="12" text-anchor="middle">
+          <g id="st0" opacity=".25"><ellipse cx="130" cy="168" rx="16" ry="7" fill="var(--accent)"/><text x="130" y="192" fill="var(--accent)">„0“ links + letztes Dribbling</text></g>
+          <g id="st1" opacity=".25"><ellipse cx="250" cy="168" rx="16" ry="7" fill="var(--yellow)"/><text x="250" y="192" fill="var(--yellow)">„1“ rechts (Ball sichern)</text></g>
+          <g id="st2" opacity=".25"><ellipse cx="360" cy="168" rx="16" ry="7" fill="var(--green)"/><text x="360" y="192" fill="var(--green)">„2“ links = Stemmschritt</text></g>
+        </g>
+        <!-- Ball Flugbahn -->
+        <path id="layPath" d="M 120 130 Q 180 155 250 120 Q 320 85 365 70 Q 430 25 487 50" fill="none" stroke="none"/>
+        <circle id="layBall" r="8" fill="var(--orange)" opacity="0"/>
+        <text x="280" y="24" fill="#9aa5bd" font-size="12" text-anchor="middle" id="layMsg">Klick auf „Abspielen“ – Korbleger von rechts</text>
+      </svg>
+      <div class="btnrow" style="justify-content:center"><button class="btn small" onclick="playLayup()">▶ Abspielen</button></div>
+    </div>
+    <p><b>Die 6 Knotenpunkte (von rechts):</b> ① letztes Dribbling = <b>Kreuzgangdribbling rechts</b> (linker Fuß setzt auf) → ② beidhändige Ballaufnahme, Ball sichern → ③ Laufschritt rechts → ④ <b>Stemmschritt links</b> → ⑤ Absprung links, rechtes Bein schwingt; Ziel: <b>kleine rechte Brettecke</b>; Wurf mit der rechten (gegnerfernen) Hand → ⑥ beidbeinige Landung.</p>
+    <p><b>Abschluss-Varianten:</b> <span class="hl">Druckkorbleger</span> (Armarbeit wie Positionswurf, Fingerspitzen zum Kopf, hoher frontaler Abwurf) · <span class="hl">Unterhandkorbleger</span> (Hand als „Schaufel/Teller“, Fingerspitzen zum Korb, verlängert den Abwurf) · Dunking. Von links: alles spiegelverkehrt (Absprung rechts, Wurf links).</p>
+    <p class="exam">Prüfungskriterien Korbleger (Praxis): Ball fällt von oben in den Ring · Wurfhand <b>diagonal zum Absprungbein</b> · Abwurf im Sprung · Zwei-Kontakt: von rechts Absprung mit <b>links</b>, von links mit <b>rechts</b>.</p>
+    <p class="muted">Vermittlung per <b>Teil-Lernmethode</b> (4 Teile: einbeiniger Sprungwurf → Anlauf → letztes Dribbling → Andribbeln). Fehlerbilder: falscher Absprungfuß (→ Rhythmus „0-1-2“), falsche Wurfhand (→ beidhändig, starke Hand auf den Rücken), zu wenig Sprunghöhe (→ Steigesprünge), Absprung zu nah am Korb (→ Blick zum Ziel statt auf den Ball).</p>
+    <div class="src">Kolb 2025, Kap. 4.3.2, S. 58–65, Abb. 4.13–4.18; Prüfungskriterien: Prüfungsmodalitäten, Anlage 1c.</div>
+  </div></details>
+
+  <details><summary>Passtechniken – Tabelle &amp; Fangtechnik</summary><div class="inner">
+    <p>Der Pass ist die <b>schnellste Form der Raumüberwindung</b> – nur mit den Händen! Beide sind verantwortlich: Passgeber*in <b>und</b> Passempfänger*in.</p>
+    <table>
+      <tr><th>Passtechnik</th><th>Merkmal</th><th>Einsatzbeispiel</th></tr>
+      <tr><td><b>Druckpass / Brustkorbpass</b> (chest pass)</td><td>Grundtechnik; direkt &amp; schnell</td><td>Einwurf</td></tr>
+      <tr><td><b>Bodenpass</b> (bounce pass)</td><td>indirekt, langsamer; prellt im <b>letzten Drittel</b> des Weges auf</td><td>gegen größere Personen</td></tr>
+      <tr><td><b>Überkopfpass</b> (overhead pass)</td><td>hart, hoher Abpasspunkt</td><td>gegen kleinere Personen</td></tr>
+      <tr><td><b>Einhändiger Pass seitlich</b></td><td>seitlicher Abpassraum wird ausgeschöpft</td><td>Center „steckt durch“</td></tr>
+      <tr><td><b>Kurzer zweihändiger Pass</b></td><td>kaum Armstreckung</td><td>Handoff</td></tr>
+      <tr><td><b>Schleuderpass</b> (baseball pass)</td><td>sehr lang, einhändig aus dem Anlauf</td><td>Schnellangriff</td></tr>
+      <tr><td><b>Lobpass</b></td><td>sehr hoher, bogenförmiger Pass</td><td>Backdoor – in den Rücken der Verteidigung</td></tr>
+    </table>
+    <p><b>Chest-Pass in 3 Phasen:</b> ① ready-position, Hände seitlich am Ball, Daumen+Zeigefinger bilden Dreieck, Ball vor der Brust, Ellenbogen nach außen → ② impulsiver Schritt vorwärts + beide Arme strecken parallel zum Boden, Hände schnappen nach außen ab („Maulwurf-Schaufelhand“) → ③ Ausfallschritt, Arme gestreckt, beobachten, zurück in die ready-position.</p>
+    <p><b>Fangen:</b> Blick zur passenden Person, gestreckte Arme + geöffnete Hände als Zielsignal → Ballgeschwindigkeit <b>amortisieren</b> (Arme geben nach, Rückwärtsschritt in die ready-position, Ball „ansaugen“).</p>
+    <p><b>Pass in den Lauf:</b> nicht auf die Person, sondern <b>vor sie</b> passen (Bewegungsrichtung + Tempo antizipieren). Je höher/länger der Pass fliegt, desto mehr Zeit hat die Verteidigung!</p>
+    <p class="muted">Vermittlung: Gassenaufstellung → mit Ortswechsel → gegen passive Verteidigung (Tigerball) → Fangen im Sprung/Rebound → Passen im Laufen (Streifenpassen, 0-Schritt-Regel!) → gegen Verteidigung → Shell-Drill. Spielreihe Stratemeyer: <em>Vom Linienbasketball zum Minibasketball</em> (Tigerball → Parteiball → Linienball → Mattenball → Kastenball → Turmball → Minibasketball) – Passen als „Mittel der Raumüberwindung“, Dribbling zunächst raus.</p>
+    <div class="src">Kolb 2025, Kap. 4.4, S. 66–76, Tab. 4.3, Abb. 4.19–4.22; Stratemeyer 1996, S. 319–321.</div>
+  </div></details>
+
+  <h3>🦀 Verteidigung: Krabbentechnik (SE 04!)</h3>
+  <div class="card">
+    <p>„Erst mit der Verteidigung wird Basketball zu einem Spiel.“ Die eine grundlegende Verteidigungs-Fortbewegung – auch <b>slides / Gleitschritttechnik / Krabbenlauf</b>, im Handbuch Basketball (2012) „GrAN-Technik“ (Greifen–Abdrücken–Nachsetzen; laut Kolb umständlich, da der <b>Abdruck zuerst</b> kommen muss).</p>
+    <div class="courtbox">
+      <svg viewBox="0 0 560 150">
+        <rect width="560" height="150" fill="var(--bg2)" rx="10"/>
+        <text x="280" y="22" fill="#9aa5bd" font-size="12" text-anchor="middle">Seitlich-rückwärts · Beine kreuzen NIE · KSP bleibt auf einer Höhe</text>
+        <g id="crab">
+          <circle cx="0" cy="60" r="10" fill="var(--orange-light)"/>
+          <rect x="-14" y="72" width="28" height="26" rx="8" fill="var(--orange-light)"/>
+          <line x1="-14" y1="76" x2="-30" y2="58" stroke="var(--orange-light)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="14" y1="76" x2="30" y2="58" stroke="var(--orange-light)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="-9" y1="98" x2="-22" y2="118" stroke="var(--orange-light)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="9" y1="98" x2="22" y2="118" stroke="var(--orange-light)" stroke-width="4" stroke-linecap="round"/>
+          <animateMotion dur="4s" repeatCount="indefinite" path="M 90 10 L 250 40 L 120 70 L 300 40 L 90 10" />
+        </g>
+        <text x="280" y="140" fill="#9aa5bd" font-size="11" text-anchor="middle">Impuls vom (in Bewegungsrichtung) hinteren Bein: Abdrücken → greifendes Stützen → Abdrücken …</text>
+      </svg>
+    </div>
+    <p><b>Technikbild:</b> kräftige, <b>flache lange Schritte seitlich-rückwärts</b> in tiefer ready-position. Füße bleiben weit auseinander, hüftbreit, <b>kein Überkreuzen</b>. Der hintere (gegnernähere) Fuß drückt ab, der vordere „greift“ stützend. Arme wie Krabbenzangen in der Luft: ein Arm auf Dribbelhöhe, der andere sichert den Passraum. Regelhinweis: Arme seitlich nur angewinkelt, nach oben gestreckt erlaubt (DBB 2022, S. 38 ff.).</p>
+    <p class="muted"><b>Vermittlungsweg (7 Stufen):</b> ① ready-position → ② „Quivern“ (Füße wie Nähmaschinennadel) → ③ „Beweg dich wie eine Krabbe übers Feld“ → ④ Schatten-Dribbling im Zick-Zack / Korridorübung mit Sternschritt-Richtungswechsel → ⑤ 1-gegen-1 im Korridor → ⑥ + Passgeber auf Aufbauposition (alle Grundtechniken kombiniert) → ⑦ Übergang in die Taktik. Fehler: KSP zu hoch (→ Wandsitz, Hahnenkampf), hinteres Bein nachgezogen statt Abdruck (→ Krabbenschritte über Hütchenreihe).</p>
+    <div class="src">Kolb 2025, Kap. 4.5, S. 76–79, Abb. 4.23; vertiefend: Kolb, M. (2026). Verteidigung im Basketball – Grundlagen. SportPraxis 2026/2, S. 10 ff.</div>
+  </div>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('positionen')">← Positionen</button><button class="btn" onclick="goMod('taktik')">Weiter: Taktik →</button></div>
+</section>
+<!-- ================= MODUL: TAKTIK ================= -->
+<section class="module" id="mod-taktik">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 4 · Kapitel 5 (Kolb 2025) · SE 04–13</span>
+      <h2>Taktiken: Individual → Gruppe → Mannschaft</h2>
+    </div>
+  </div>
+  <p class="lead">Kolbs Logik: Individualtaktik (1 gegen 1) ist die Voraussetzung für Gruppentaktik (2–4 Personen), und jede Gruppentaktik wird zur Mannschaftstaktik (5 gegen 5) komplettiert.</p>
+
+  <h3>👤 Individualtaktik – die 5 Leitfragen (Kap. 5.1)</h3>
+  <p class="muted">Genau so strukturiert das Buch die Individualtaktik. Deck jede Frage auf!</p>
+  <div class="grid2">
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>⚔️ 1. Was mache ich, um den Ball zu <u>erhalten</u>?</b>
+      <div class="answer"><p><b>Außen:</b> Freilaufen („in-out“) – mit Tempo in die Zone rein und explosiv wieder raus hinter die 3-Punkte-Linie; Laufwege: <b>I-Cut, V-Cut, L-Cut, Banana-Cut</b> (s. Animation unten). Backdoor/Frontdoor-Schnitte. Signal: gespreizte Hand zeigt den Anspielpunkt. <b>Innen (Center):</b> <span class="hl">Aufposten</span> – Rücken zum Korb am Zonenrand, ready-position (3-s-Regel!). Außerdem: <b>Offensiv-Rebound</b>.</p>
+      <p class="muted">Situationslogik: Verteidigung zwischen Ball und mir → Lobpass zum Korb · Verteidigung bleibt in der Zone → außen frei · Verteidigung bleibt an der 3er-Linie → in der Zone frei.</p>
+      <div class="src">Kolb 2025, Kap. 5.1.1, S. 85–88, Abb. 5.3–5.6.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🛡️ 2. Was mache ich, um den Ball zu <u>sichern</u>?</b>
+      <div class="answer"><p><b>Im Stand:</b> Sternschritt – Ellenbogen seitlich, Ball nah am Oberkörper; reagiert die Verteidigung, folgt der nächste impulsive Sternschritt. <b>In der Bewegung:</b> möglichst <b>tiefes, kraftvolles Dribbling</b> – kurze Ballflugzeit = mehr Kontrolle, kleinere Zeitfenster für Steals.</p>
+      <div class="src">Kolb 2025, Kap. 5.1.2, S. 88 f.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🏀 3. Was mache ich, um den Ball in den <u>Korb</u> zu bringen?</b>
+      <div class="answer"><p>Bei Ballerhalt zuerst: <span class="hl">Facing</span> = frontal zum Korb ausrichten (per Sternschritt oder Hineinspringen) in die <b>shot-pass-dribble-Position (spd)</b>. Peripher Mit-/Gegenspieler sehen, Gegenüber „lesen“ (Abstand, Fußstellung, Athletik, Länge).</p>
+      <p>• Verteidigung <b>weit weg</b> (&gt; Armlänge) → Wurf. · <b>Ganz eng</b> → am vorderen Fuß vorbei zum Korb dribbeln, Korbleger (erfolgreichster Abschluss!). · <b>Mittlerer Abstand</b> → Täuschungen (Dribbel-/Wurftäuschung → Penetration). · Verteidigung <b>aufrecht/langsam</b> → Antrittsdribbling. · Verteidigung <b>größer</b> → Mittel-/Weitdistanz statt Korbnähe. · Gestoppt? → Sternschritt Richtung Korb, ggf. „Sternschritt auflösen“. · Mitspieler frei unter dem Korb → <b>Assist</b>. · Auf der Post-Position → <b>Power Move</b> per Sternschritt rückwärts.</p>
+      <div class="src">Kolb 2025, Kap. 5.1.3, S. 89 f.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🧱 4. Verteidigung: Was mache ich, damit der <u>Korb geschützt</u> ist? (SE 04)</b>
+      <div class="answer"><p><b>Gegner mit Ball:</b> zwischen Angreifer*in und Korb bleiben (face to face), ready-position. <span class="hl">Eine Dribbelrichtung anbieten</span> (meist zur Außenlinie!): vorderer Fuß mittig vor den Füßen des Gegenübers, hinterer Fuß öffnet diagonal den Weg. Gleichseitiger Arm stört auf Ballhöhe, der andere sichert den Passraum. Blick: peripher auf die <b>Bauchregion</b>. Beim Dribbling: Krabbentechnik, immer eine Schrittlänge voraus, Richtung „delegieren“. Je näher am Korb, desto enger/körperbetonter. Ziel: Ballaufnahme spätestens an der Zone <b>erzwingen</b> – danach nur noch Pass/Wurf verteidigen: eng ran, aufrichten, Arme hoch + seitlich.</p>
+      <p><b>Gegner ohne Ball:</b> zwischen Gegner*in und Korb; Ball UND Gegner*in ständig zeitgleich wahrnehmen (peripher/taktil). Varianten: <b>half-deny</b> (Rücken zur Korb-Korb-Linie) und <b>full-deny/fronting</b> (zwischen Ball und Gegner*in, Unterarm am Bauch des Gegenübers).</p>
+      <div class="src">Kolb 2025, Kap. 5.1.4, S. 90–93; SportPraxis 2026/2, S. 10 ff.</div></div>
+    </div>
+    <div class="card reveal"><span class="tap">aufdecken</span>
+      <b>🥷 5. Verteidigung: Was mache ich, um den Ball zu <u>erobern</u>?</b>
+      <div class="answer"><p>① Ball wird offen gehalten → mit <b>beiden Händen greifen</b> und ziehen. ② Offenes Dribbling → Ball <b>wegtippen</b> (Steal), dabei stabil bleiben – kein Gewicht nach vorn! ③ Passweg <b>antizipieren</b> und kreuzen (Interception – riskant: bei Misserfolg bin ich ausgeschaltet). ④ Nach jedem Wurf: <b>Rebound</b> – als Verteidigung per <span class="hl">Ausboxen (box out)</span>: bei Wurfantizipation rücklings in den Gegner drehen, aussperren, Ballflug einschätzen, zum Ball (Sprung), fangen.</p>
+      <div class="src">Kolb 2025, Kap. 5.1.5, S. 94, Tab. 5.2.</div></div>
+    </div>
+    <div class="card">
+      <b>🏃 Cuts – Laufwege zum Freilaufen (Animation)</b>
+      <div class="courtbox" style="margin:.5rem 0">
+        <svg viewBox="0 0 300 250">
+          <rect width="300" height="250" fill="var(--court)" rx="8"/>
+          <line x1="0" y1="15" x2="300" y2="15" stroke="var(--court-line)" stroke-width="3"/>
+          <rect x="110" y="15" width="80" height="90" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2"/>
+          <path d="M 20 15 L 20 30 A 130 130 0 0 0 280 30 L 280 15" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+          <circle cx="150" cy="38" r="5" fill="none" stroke="var(--orange)" stroke-width="2.5"/>
+          <path id="cutI" d="M 150 190 L 150 80 L 150 190" fill="none" stroke="#64b5f6" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <path id="cutV" d="M 195 195 L 155 90 L 215 175" fill="none" stroke="#4fc3f7" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <path id="cutBan" d="M 60 200 Q 40 120 105 70" fill="none" stroke="#ef5350" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <path id="cutL" d="M 255 120 L 255 55 L 195 55" fill="none" stroke="#ffca28" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <circle r="6" fill="#64b5f6"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cutI"/></animateMotion></circle>
+          <circle r="6" fill="#4fc3f7"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cutV"/></animateMotion></circle>
+          <circle r="6" fill="#ef5350"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cutBan"/></animateMotion></circle>
+          <circle r="6" fill="#ffca28"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cutL"/></animateMotion></circle>
+          <text x="150" y="215" font-size="11" fill="#64b5f6" text-anchor="middle">I-Cut</text>
+          <text x="228" y="195" font-size="11" fill="#4fc3f7" text-anchor="middle">V-Cut</text>
+          <text x="55" y="225" font-size="11" fill="#ef5350" text-anchor="middle">Banana-Cut</text>
+          <text x="262" y="140" font-size="11" fill="#ffca28" text-anchor="middle">L-Cut</text>
+        </svg>
+      </div>
+      <p class="muted" style="font-size:.8rem"><b>I:</b> gerade rein, gleicher Weg raus · <b>V:</b> rein und versetzt raus · <b>Banana:</b> erst gebogen, dann geradlinig · <b>L:</b> „Haken schlagen“. Entscheidend: weit genug reinlaufen + <b>Tempowechsel</b>!</p>
+      <div class="src">Kolb 2025, Kap. 5.1.1, Abb. 5.3.</div>
+    </div>
+  </div>
+
+  <h3>👥 Gruppentaktik (Kap. 5.2) · SE 05, 06, 09</h3>
+
+  <details open><summary>Give &amp; Go &amp; Fill – Passen, Schneiden, Auffüllen (Animation)</summary><div class="inner">
+    <div class="courtbox">
+      <svg viewBox="0 0 340 280" id="ggfSVG">
+        <rect width="340" height="280" fill="var(--court)" rx="8"/>
+        <line x1="0" y1="15" x2="340" y2="15" stroke="var(--court-line)" stroke-width="3"/>
+        <rect x="130" y="15" width="80" height="95" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2"/>
+        <path d="M 25 15 L 25 35 A 148 148 0 0 0 315 35 L 315 15" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+        <circle cx="170" cy="40" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <!-- Spieler: 1 Aufbau (mit Ball), 2 rechter Flügel, 3 linker Flügel -->
+        <circle id="ggfP3" cx="55" cy="120" r="12" fill="var(--accent)"/><text id="ggfT3" x="55" y="124" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">3</text>
+        <circle id="ggfP2" cx="285" cy="120" r="12" fill="var(--accent)"/><text id="ggfT2" x="285" y="124" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">2</text>
+        <circle id="ggfP1" cx="170" cy="235" r="12" fill="var(--accent)"/><text id="ggfT1" x="170" y="239" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">1</text>
+        <circle id="ggfBall" cx="170" cy="220" r="7" fill="var(--orange)"/>
+        <text x="170" y="268" fill="#8b93a7" font-size="11" text-anchor="middle" id="ggfMsg">1 = Aufbau (Ball) · 2/3 = Flügel — „Abspielen“ drücken</text>
+      </svg>
+      <div class="btnrow" style="justify-content:center"><button class="btn small" onclick="playGGF()">▶ Abspielen</button><button class="btn small ghost" onclick="resetGGF()">↺ Reset</button></div>
+    </div>
+    <p><b>Ablauf:</b> ① <b>give</b> – Aufbau passt auf den Flügel (der sich per In-Out freiläuft; Ball und Person kommen idealerweise zeitgleich an) → ② <b>go</b> – Passgeber*in schneidet (bananenförmig über die Ballseite) zum Korb und bietet sich für den Rückpass an → ③ <b>fill</b> – von der ballfernen Seite rückt eine Person auf die frei gewordene (Aufbau-)Position auf; die cuttende Person füllt ohne Rückpass die freie Außenposition.</p>
+    <p><b>Warum fill?</b> Kurze Passwege · ständig besetzte Aufbauposition = <span class="hl">Angriffssicherung (safety)</span> · <b>Balance</b> (gleichmäßige Raumverteilung li/re) · <b>Spread</b> (auseinanderziehen) · <b>Space</b> (Freiraum im 2-Punkte-Bereich – nur so gibt es einen Weg zum Korb). Grundprinzip: Mit der Ballabgabe gebe ich die Verantwortung <b>nicht</b> ab – ich mache mich sofort wieder anspielbar.</p>
+    <p class="muted"><b>Vermittlung – Überzahlspielreihe:</b> 2-0 (rechts, dann links) → 2-1 → 2-2 („Schließe aus dem give&amp;go ab!“) → 3-0 (give&amp;go&amp;fill als Kontinuum) → 3-1 → 3-2 (ohne Doppeln, nur aus give&amp;go punkten) → 3-3 (Bonusregel: Korbleger-Korb = 3 Punkte).</p>
+    <div class="src">Kolb 2025, Kap. 5.2.1, S. 95–99, Abb. 5.7–5.8, Tab. 5.3.</div>
+  </div></details>
+
+  <details><summary>Pick &amp; Roll – Blocken und Abrollen (Animation) · SE 06</summary><div class="inner">
+    <div class="courtbox">
+      <svg viewBox="0 0 340 280" id="pnrSVG">
+        <rect width="340" height="280" fill="var(--court)" rx="8"/>
+        <line x1="0" y1="15" x2="340" y2="15" stroke="var(--court-line)" stroke-width="3"/>
+        <rect x="130" y="15" width="80" height="95" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2"/>
+        <path d="M 25 15 L 25 35 A 148 148 0 0 0 315 35 L 315 15" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+        <circle cx="170" cy="40" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <circle id="pnrD" cx="170" cy="200" r="12" fill="#c58ad7"/><text id="pnrDT" x="170" y="204" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">X</text>
+        <circle id="pnrB" cx="255" cy="130" r="12" fill="var(--accent)"/><text id="pnrBT" x="255" y="134" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">B</text>
+        <circle id="pnrA" cx="170" cy="235" r="12" fill="var(--accent)"/><text id="pnrAT" x="170" y="239" font-size="11" text-anchor="middle" fill="#111" font-weight="bold">A</text>
+        <circle id="pnrBall" cx="170" cy="220" r="7" fill="var(--orange)"/>
+        <text x="170" y="268" fill="#8b93a7" font-size="11" text-anchor="middle" id="pnrMsg">A = Ballbesitz · B = Blocksteller · X = Verteidigung</text>
+      </svg>
+      <div class="btnrow" style="justify-content:center"><button class="btn small" onclick="playPNR()">▶ Abspielen</button><button class="btn small ghost" onclick="resetPNR()">↺ Reset</button></div>
+    </div>
+    <p><b>Block stellen (pick/screen):</b> stabil – weite Standfläche, gebeugte Knie, Arme vor dem Körper gekreuzt – <b>frontal an die Verteidigung</b> des Mitspielers, Rücken in den freizublockenden Weg. Dann <b>stehen bleiben</b> (Regeln: bewegter Block = Foul!). <b>Block nutzen:</b> warten bis der Block steht, dann mit schnellem Schritt <b>schulterdicht</b> vorbeidribbeln (Kreuzgangdribbling), Verteidigung im Block „hängen lassen“. <b>Abrollen (roll):</b> sobald der Mitspieler vorbei ist – Sternschritt <b>rückwärts</b>, Rücken zur geblockten Person, in den freien Raum anbieten.</p>
+    <p><b>Blockvarianten:</b> <span class="badge">direkter Block (ball screen)</span> für die Person MIT Ball · <span class="badge">indirekter Block (off-ball screen)</span> ohne Ball · <span class="badge">Doppelblock</span> · <span class="badge">Wurfschirm</span> blockt für den direkten Wurf frei · <span class="badge">Abstreifen</span> an stehender Person · <span class="badge">pick &amp; pop</span> statt Abrollen in den freien Raum entfernt vom Korb.</p>
+    <p class="muted"><b>Vermittlung nach TGU</b> („Teaching Games for Understanding", Mitchell et al. 2006, induktiv): ① Spielform 3-3 mit Aufgabe „Bekomme die ballbesitzende Person für einen Korbleger frei!“ → ② Gespräch (Was/Wie-Fragen) → ③ Fertigkeitsübung 2-1 mit „Personaltrainer*innen“ am Spielfeldrand → ④ Spielform zur Festigung (Block-Korb = 3 Pkt.). Modi: „make it give it“ (nach Korb Ball abgeben) vs. „make it take it“.</p>
+    <p class="exam">Block nur sinnvoll, wenn die ballbesitzende Person <b>noch nicht gedribbelt</b> hat! Und: Der Block ist im Buch das Paradebeispiel für <b>soziale Kompetenz/„Helfen“</b> im Spiel.</p>
+    <div class="src">Kolb 2025, Kap. 5.2.2, S. 99–103, Abb. 5.9–5.10.</div>
+  </div></details>
+
+  <details><summary>Verteidigung in Blocksituationen (Kap. 5.2.3)</summary><div class="inner">
+    <p>Immer zuerst: <b>Block ansagen</b> („Block links/rechts!“). Fünf Möglichkeiten:</p>
+    <table>
+      <tr><th>Taktik</th><th>Wer bleibt wo?</th><th>Bewertung</th></tr>
+      <tr><td><b>Switchen</b> (Wechseln)</td><td>Verteidiger tauschen die Gegenspieler</td><td>Einfach (wenig Überblick nötig), aber: Gefahr von <span class="hl">Miss-Match</span> (groß gg. klein …) &amp; Überzahl am Korb – bei der Einführung vermeiden!</td></tr>
+      <tr><td><b>Über den Block gehen</b> (running over)</td><td>Jede*r bleibt am eigenen Gegner; Schritt zum Gegenspieler, sobald der Block steht, und über den Block mitgehen</td><td>Anfängertauglich, aggressiv</td></tr>
+      <tr><td><b>Absinken</b> (under)</td><td>Am eigenen Gegner bleiben, auf der gegnerfernen Seite des Blocks vorbeidrehen Richtung Korb</td><td>Anfängertauglich, sicherer Weg zum Korb</td></tr>
+      <tr><td><b>Durchgleiten</b> (going through)</td><td>Mitspieler macht Platz (Schritt zum Korb), geblockte Person läuft durch die Lücke</td><td>Weiterführend, braucht Kommunikation</td></tr>
+      <tr><td><b>Help &amp; Recover</b></td><td>kurz aushelfen (switchen) und zurückwechseln</td><td>Rettungsanker nach Miss-Match</td></tr>
+    </table>
+    <div class="src">Kolb 2025, Kap. 5.2.3, S. 103–105; Video-Tipp im Buch: „Defending Screens – Patrick Hunt“ (WABC).</div>
+  </div></details>
+
+  <details open><summary>Sinkende Personen-Verteidigung (SPV) in der Gruppe (Animation) · SE 09</summary><div class="inner">
+    <p><b>Basis:</b> enge „man-to-man defense“ (PV) – jede*r setzt die Individualtaktik um. <b>Sinkend (SPV):</b> + räumliches „Lösen“ vom direkten Gegenspieler (<span class="hl">Floating</span>). <b>Absinken</b> = weg vom Gegenspieler, Richtung <b>Korb UND Ball</b> → aus der <b>help-position</b> kann rechtzeitig geholfen werden; danach: <span class="hl">„help the helper“</span>.</p>
+    <div class="courtbox">
+      <svg viewBox="0 0 340 280" id="spvSVG">
+        <rect width="340" height="280" fill="var(--court)" rx="8"/>
+        <line x1="0" y1="15" x2="340" y2="15" stroke="var(--court-line)" stroke-width="3"/>
+        <rect x="130" y="15" width="80" height="95" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2"/>
+        <path d="M 25 15 L 25 35 A 148 148 0 0 0 315 35 L 315 15" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+        <circle cx="170" cy="40" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <line x1="170" y1="15" x2="170" y2="280" stroke="#8b93a7" stroke-width="1.5" stroke-dasharray="4 5"/>
+        <!-- Angreifer -->
+        <circle id="spvA1" cx="170" cy="230" r="12" fill="var(--accent)"/><text x="170" y="234" font-size="11" text-anchor="middle" fill="#111" font-weight="bold" id="spvA1T">1</text>
+        <circle id="spvA2" cx="290" cy="115" r="12" fill="var(--accent)"/><text x="290" y="119" font-size="11" text-anchor="middle" fill="#111" font-weight="bold" id="spvA2T">2</text>
+        <circle id="spvA3" cx="50" cy="115" r="12" fill="var(--accent)"/><text x="50" y="119" font-size="11" text-anchor="middle" fill="#111" font-weight="bold" id="spvA3T">3</text>
+        <!-- Verteidiger -->
+        <circle id="spvD1" cx="170" cy="205" r="11" fill="#c58ad7"/>
+        <circle id="spvD2" cx="272" cy="122" r="11" fill="#c58ad7"/>
+        <circle id="spvD3" cx="75" cy="118" r="11" fill="#c58ad7"/>
+        <circle id="spvBall" cx="170" cy="215" r="7" fill="var(--orange)"/>
+        <text x="170" y="268" fill="#8b93a7" font-size="11" text-anchor="middle" id="spvMsg">Blau = Angriff, Lila = Verteidigung. „Pass simulieren“ drücken!</text>
+      </svg>
+      <div class="btnrow" style="justify-content:center">
+        <button class="btn small" onclick="spvState(0)">Ball auf 1 (Aufbau)</button>
+        <button class="btn small" onclick="spvState(1)">Pass auf 2 (rechts)</button>
+        <button class="btn small" onclick="spvState(2)">Pass auf 3 (links)</button>
+      </div>
+      <p class="muted" style="font-size:.8rem">Beobachte: Wer am <b>Ball</b> oder <b>1. Passweg</b> ist, verteidigt eng. Wer 2+ Passwege entfernt ist (ballferne Seite), <b>sinkt ab</b> Richtung Zone/Ball.</p>
+    </div>
+    <p><b>Orientierungshilfen:</b> Korb-Korb-Linie teilt in Ballseite (strong side) und ballferne Seite (weak side) · <b>Anzahl der Passwege</b> (Pass zur direkt benachbarten Position = 1 Passweg) entscheidet: Ball + 1. Passweg = eng, ab 2. Passweg = absinken. In der help-position: ready-position, Arme seitlich oben, ein Fuß zeigt zum Ball, einer zum Gegenspieler, Fortbewegung per Krabbentechnik, <b>peripherer Blick auf Ball UND Gegner*in gleichzeitig</b>.</p>
+    <p class="muted"><b>Spielreihe (4 Stufen):</b> ① Angriff steht &amp; passt nur – Verteidigung positioniert sich (Pässe durchlassen!) → ② Passen + Laufen (ohne Abschluss; jetzt Pässe abfangen) → ③ + Dribbling (helfen/übernehmen; kein Doppeln!) → ④ alles erlaubt: 5 Angriffe in Folge, Punkte für Korb (Angriff) bzw. Ballgewinn (Verteidigung); dann „make it take it“.</p>
+    <div class="src">Kolb 2025, Kap. 5.2.4, S. 105–109, Abb. 5.11–5.13, Tab. 5.4.</div>
+  </div></details>
+
+  <h3>🏟️ Mannschaftstaktik (Kap. 5.3) · SE 10–13</h3>
+
+  <details><summary>Schnellangriff / Fast Break (Kap. 5.3.1) – Laufspuren-Animation</summary><div class="inner">
+    <p>Schnellste Taktik zum einfachen Abschluss (Korbleger/Dunking). Ideal nach <b>Steal/Interception</b> oder gegnerischem Korberfolg. <b>Transition game</b> = Umschalten (transition offense/defense). Der <b>nummerierte Schnellangriff</b> ordnet das Feld in Spuren:</p>
+    <div class="courtbox">
+      <svg viewBox="0 0 560 240" id="fbSVG">
+        <rect width="560" height="240" fill="var(--court)" rx="8"/>
+        <rect x="15" y="15" width="530" height="210" fill="none" stroke="var(--court-line)" stroke-width="2.5"/>
+        <line x1="280" y1="15" x2="280" y2="225" stroke="var(--court-line)" stroke-width="2"/>
+        <circle cx="280" cy="120" r="24" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+        <line x1="15" y1="73" x2="545" y2="73" stroke="#8b93a7" stroke-width="1.2" stroke-dasharray="4 5"/>
+        <line x1="15" y1="167" x2="545" y2="167" stroke="#8b93a7" stroke-width="1.2" stroke-dasharray="4 5"/>
+        <circle cx="42" cy="120" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <circle cx="518" cy="120" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <text x="60" y="40" font-size="10" fill="#8b93a7">Außenspur</text>
+        <text x="60" y="215" font-size="10" fill="#8b93a7">Außenspur</text>
+        <text x="60" y="95" font-size="10" fill="#8b93a7">Zwischenspur</text>
+        <text x="60" y="130" font-size="10" fill="#8b93a7">Mittelspur</text>
+        <!-- Spieler -->
+        <g font-size="10" font-weight="bold">
+          <circle id="fb2" cx="90" cy="30" r="11" fill="var(--accent)"/><text x="90" y="34" text-anchor="middle" fill="#111">2</text>
+          <circle id="fb3" cx="90" cy="210" r="11" fill="var(--accent)"/><text x="90" y="214" text-anchor="middle" fill="#111">3</text>
+          <circle id="fb1" cx="70" cy="90" r="11" fill="var(--accent)"/><text x="70" y="94" text-anchor="middle" fill="#111">1</text>
+          <circle id="fb4" cx="110" cy="150" r="11" fill="var(--accent)"/><text x="110" y="154" text-anchor="middle" fill="#111">4</text>
+          <circle id="fb5" cx="30" cy="120" r="11" fill="var(--accent)"/><text x="30" y="124" text-anchor="middle" fill="#111">5</text>
+        </g>
+        <text x="280" y="12" font-size="0" fill="#9aa5bd"></text>
+      </svg>
+      <p class="muted" style="font-size:.8rem"><b>Rollen:</b> 5 (Center) wirft schnell ein → 2 &amp; 3 (Flügel) <b>sprinten auf den Außenspuren</b>, ab Mittellinie bereit für den langen Pass → 1 (Aufbau) läuft sich grundliniennah frei, passt auf einen Flügel, bleibt außen → 4 läuft als <b>1. Trailer</b> auf einer Zwischenspur zur FWL und cuttet über die Ballseite zum Korb → 5 folgt als <b>2. Trailer</b> auf der Mittelspur in die entstandene Lücke. Kein Abschluss? → Positionsangriff.</p>
+    </div>
+    <p class="muted">Vermittlung: <b>Achterlauf/Criss-Cross</b> (3-0 → 4-0 → 5-0; „dem eigenen Pass hinterherlaufen“), lange Pässe „coast to coast“ (Schleuderpass!), Achterlauf mit anschließendem 2-1 (Transition), 5 Schnellangriffe im Pendel (Abschluss durch 1 → 2 → 3 → Trailer 4 → Trailer 5).</p>
+    <div class="src">Kolb 2025, Kap. 5.3.1, S. 110–116, Abb. 5.14–5.18.</div>
+  </div></details>
+
+  <details open><summary>Angriff nach Prinzipien: 3-Out-2-In (Kap. 5.3.2) · SE 10</summary><div class="inner">
+    <p><b>Prinzipien statt Schablonen:</b> Prinzipien definieren den Handlungsrahmen, die Entscheidung trifft das Team situativ selbst („bewege dich, sobald du gepasst hast“). Vorteile: kreative Entfaltung, für die Verteidigung schwer kalkulierbar, fördert taktische Entwicklung. Gegenmodell: <b>„Schablonen“-Angriff</b> (z. B. 1:3:1, „play“) mit festen Laufwegen – nimmt Verantwortung ab, gut für junge Teams.</p>
+    <div class="courtbox">
+      <svg viewBox="0 0 340 260">
+        <rect width="340" height="260" fill="var(--court)" rx="8"/>
+        <line x1="0" y1="15" x2="340" y2="15" stroke="var(--court-line)" stroke-width="3"/>
+        <rect x="130" y="15" width="80" height="95" fill="rgba(232,98,45,.30)" stroke="var(--court-line)" stroke-width="2"/>
+        <path d="M 25 15 L 25 35 A 148 148 0 0 0 315 35 L 315 15" fill="none" stroke="var(--court-line)" stroke-width="2"/>
+        <circle cx="170" cy="40" r="5" fill="none" stroke="#c44a1a" stroke-width="2.5"/>
+        <g font-size="11" font-weight="bold">
+          <circle cx="170" cy="225" r="12" fill="var(--accent)"/><text x="170" y="229" text-anchor="middle" fill="#111">1</text>
+          <circle cx="60" cy="140" r="12" fill="var(--accent)"/><text x="60" y="144" text-anchor="middle" fill="#111">2</text>
+          <circle cx="280" cy="140" r="12" fill="var(--accent)"/><text x="280" y="144" text-anchor="middle" fill="#111">3</text>
+          <circle cx="122" cy="85" r="12" fill="#ef8a50"/><text x="122" y="89" text-anchor="middle" fill="#111">4</text>
+          <circle cx="218" cy="45" r="12" fill="#ef8a50"/><text x="218" y="49" text-anchor="middle" fill="#111">5</text>
+        </g>
+        <text x="170" y="250" font-size="11" fill="#8b93a7" text-anchor="middle">3 Außen (hinter 3er-Linie) · 2 Innen (an der Zone: ballseitig tief, ballfern hoch)</text>
+      </svg>
+    </div>
+    <p><b>Die 5 Prinzipien des 3-Out-2-In:</b></p>
+    <p>① <b>give &amp; go &amp; fill</b> – wer passt, bewegt sich; alle füllen zum Ball hin auf.<br>
+    ② <b>Spacing</b> – möglichst weite Distanz zueinander.<br>
+    ③ <b>Innenspieler*innen bleiben an/in der Zone:</b> ballseitig <b>tief aufgepostet</b>, ballfern <b>hoch</b> an der Zonenseite.<br>
+    ④ <b>Außenspieler*innen</b> kehren nach jeder Aktion sofort hinter die 3-Punkte-Linie zurück (freie Position).<br>
+    ⑤ Bei Penetration eines Außenspielers <b>weichen die Innen raumgebend aus</b> – bleiben anspielbar/reboundbereit.</p>
+    <p class="muted">Personal: 2 durchsetzungsstarke Innen (kurze Pässe, Korbnähe) + 3 Außen (Penetration, sichere Pässe). Sehr stark gegen Personenverteidigung; viele 1-gegen-1-Situationen in Korbnähe; 2 Personen sichern den Offensiv-Rebound. Schwäche: wenn die Verteidigung zu doppeln beginnt.</p>
+    <div class="src">Kolb 2025, Kap. 5.3.2, S. 116–118, Abb. 5.19. (Im Seminarplan „2In-3Out“ genannt.)</div>
+  </div></details>
+
+  <details open><summary>Sinkende Personen-Verteidigung im 5-5 (Kap. 5.3.4) · SE 11 + 13</summary><div class="inner">
+    <p>Mannschaftstaktisch gelten <b>dieselben Absprachen wie in der Gruppe</b> – plus detaillierte Vorgaben („Set defense“) gegen den 3-Out-2-In-Angriff:</p>
+    <div class="grid2">
+      <div class="card"><b>Absprachen am Ball / außen</b>
+        <p style="font-size:.9rem">• Kurze Pässe und Dribblings <b>in die Mitte (Zone) verhindern</b><br>
+        • Lenken: <b>oberhalb</b> der verlängerten FWL → Weg zur <b>Seitenlinie</b> öffnen; <b>unterhalb</b> → Weg zur <b>Grundlinie</b> öffnen<br>
+        • Dribbelweg in die <b>Ecke (corner)</b> öffnen<br>
+        • Blöcke werden <b>über den Block gehend</b> verteidigt, ggf. help &amp; recover<br>
+        • <b>Es wird nicht gedoppelt!</b></p></div>
+      <div class="card"><b>Absprachen am Low Post / Hilfe</b>
+        <p style="font-size:.9rem">• Low-Post-Verteidigung <b>abhängig von der Ballposition</b>:<br>
+        &nbsp;&nbsp;– Ball <b>oberhalb</b> der verl. FWL → <span class="hl">half-deny</span><br>
+        &nbsp;&nbsp;– Ball <b>zwischen FWL und Grundlinie</b> → <span class="hl">full-deny</span><br>
+        • Hilfe kommt <b>immer von der ballfernen Seite</b><br>
+        • Kein recover möglich → „<b>help!</b>“ rufen → <b>Rotation</b>: zu den frei werdenden Angreifern „auffüllen“, ggf. „help the helper“</p></div>
+    </div>
+    <div class="src">Kolb 2025, Kap. 5.3.4, S. 119–121, Abb. 5.21–5.24.</div>
+  </div></details>
+
+  <details><summary>Bonus: Raumverteidigung / zone defense (Kap. 5.3.5) – zur Abgrenzung</summary><div class="inner">
+    <p>Erst lernen, <b>wenn die SPV beherrscht wird</b>. Feld in 5 Teilräume, in jedem wird Personenverteidigung gespielt; an den Grenzen wird übergeben/übernommen (verbale Kommunikation!). Ziel: Korberfolge aus der Nahdistanz verhindern. Beispiel <b>2:1:2</b> – stark gegen Teams mit schwachem Fernwurf, Korbleger fast unmöglich. <b>Schwachstellen:</b> Nahtstellen der Teilräume (bei 2:1:2: seitlich-mittig an der Zone + mittig an der FWL), langsamer als Swing-Pässe. Kombiformen: z. B. „Diamond and one“. <b>Wichtig:</b> Im Jugendbereich (JBBL/NBBL/WNBL) ist ausschließlich Personenverteidigung vorgeschrieben (DBB 2019)! Presse-Varianten: Ganzfeld-, Halbfeldpresse, Positionsverteidigung.</p>
+    <div class="src">Kolb 2025, Kap. 5.3.5, S. 122 f., Abb. 5.25–5.26.</div>
+  </div></details>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('techniken')">← Techniken</button><button class="btn" onclick="goMod('zeichen')">Weiter: Handzeichen →</button></div>
+</section>
+<!-- ================= MODUL: HANDZEICHEN ================= -->
+<section class="module" id="mod-zeichen">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 5 · DBB-Regelwerk 2022, Anhang A, S. 61 ff.</span>
+      <h2>Schiedsrichter-Handzeichen</h2>
+    </div>
+  </div>
+  <p class="lead">„Jedes Foul wird entsprechend seiner Zuordnung von der/dem Schiedsrichter*in per Handzeichen angezeigt“ (Kolb 2025, Kap. 2.3, S. 19). Die Grafiken sind schematische Eigen-Darstellungen der offiziellen FIBA/DBB-Zeichen – zum Nachschlagen: DBB-Regelwerk Anhang A.</p>
+
+  <div class="btnrow">
+    <button class="btn small" id="sigModeBtn" onclick="toggleSigMode()">🙈 Lernmodus: Namen verstecken</button>
+    <button class="btn small ghost" onclick="filterSig('alle')">Alle</button>
+    <button class="btn small ghost" onclick="filterSig('spiel')">Spielverwaltung</button>
+    <button class="btn small ghost" onclick="filterSig('punkte')">Punkte</button>
+    <button class="btn small ghost" onclick="filterSig('violation')">Regelverstöße</button>
+    <button class="btn small ghost" onclick="filterSig('foul')">Fouls</button>
+  </div>
+  <div class="sig-grid" id="sigGrid"></div>
+  <div class="note" style="margin-top:1rem"><b>Merk-System:</b> ① Punkte-Zeichen arbeiten mit <b>Fingern + Abklappen</b> · ② Zeitverstöße mit der <b>Zahl der Finger</b> (3-5-8) bzw. Schulter-Tipp (24 s) · ③ Verstöße imitieren den Fehler (Schrittfehler = Fäuste kreisen, Doppeldribbling = Prellbewegung) · ④ Fouls imitieren den Kontakt (Halten = Handgelenk greifen, Stoßen = Stoßbewegung, Charging = Faust in Handfläche).</div>
+  <div class="src">DBB (Hrsg.) (2022). FIBA Offizielle Basketball-Regeln, Anhang A: Handzeichen der Schiedsrichter, S. 61 ff. (verlinkt im Buch: Kolb 2025, Kap. 2.3, S. 19).</div>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('taktik')">← Taktik</button><button class="btn" onclick="goMod('quiz')">Weiter: Quiz →</button></div>
+</section>
+
+<!-- ================= MODUL: QUIZ ================= -->
+<section class="module" id="mod-quiz">
+  <div class="mod-hero">
+    <div class="mod-hero-inner">
+      <span class="kicker">Modul 6 · Selbsttest</span>
+      <h2>Quiz &amp; Lernkarten</h2>
+    </div>
+  </div>
+  <p class="lead">Erst die Zahlen-Karten drillen, dann das Quiz. Falsche Antworten sind Gold wert – die Themen nochmal im jeweiligen Modul nachlesen.</p>
+
+  <h3>🔢 Zahlen-Drill (Karten umdrehen)</h3>
+  <div class="grid3" id="factCards"></div>
+  <div class="btnrow"><button class="btn small ghost" onclick="buildFactCards()">🔀 Karten mischen</button></div>
+
+  <h3>❓ Klausur-Quiz (10 zufällige Fragen)</h3>
+  <div class="card" id="quizBox">
+    <div class="progressbar"><div id="quizProg" style="width:0%"></div></div>
+    <div id="quizContent"><button class="btn" onclick="startQuiz()">Quiz starten</button></div>
+  </div>
+
+  <div class="next-btn"><button class="btn ghost" onclick="goMod('zeichen')">← Handzeichen</button><button class="btn" onclick="goMod('start')">Zurück zum Start</button></div>
+</section>
+<!-- ###SECTIONS### -->
+</main>
+
+<footer id="mainfooter">
+<h4>Quellen &amp; Nachschlagen</h4>
+<ul>
+  <li><b>Kolb, M. (2025).</b> <em>Basketball – Das Praxisbuch für Studium, Training und Freizeitsport</em> (1. Aufl.). Springer. – Pflichtliteratur; Kapitel-/Seitenangaben an jedem Abschnitt. DOI: 10.1007/978-3-662-71467-6</li>
+  <li><b>DBB – Deutscher Basketball Bund e.V. (Hrsg.) (2022).</b> <em>FIBA Offizielle Basketball-Regeln.</em> Schiedsrichter-Handzeichen: Anhang A, S. 61 ff. Online: basketball-bund.de (PDF „DBB_Offizielle-Basketball-Regeln_2022“)</li>
+  <li><b>Kolb, M. (2026).</b> Verteidigung im Basketball – Grundlagen. <em>SportPraxis</em> 2026/2, S. 10 ff.</li>
+  <li><b>Fachleitung Basketball (2025).</b> Basketball-Prüfungsmodalitäten (Sommer 2025).</li>
+  <li><b>Seminarplan:</b> BasketballPPP.pdf (Folien zur 1. Seminareinheit, M. Kolb, SoSe 2026)</li>
+</ul>
+<p style="margin-top:.8rem">Dieses Lerndokument wurde für die persönliche Prüfungsvorbereitung erstellt. Alle Abbildungen sind eigene schematische Darstellungen nach den o.g. Quellen.</p>
+</footer>
+
+<script>
+/* ---------- Navigation ---------- */
+function goMod(id){
+  document.querySelectorAll('section.module').forEach(s=>s.classList.remove('active'));
+  document.getElementById('mod-'+id).classList.add('active');
+  document.querySelectorAll('#topnav button').forEach(b=>b.classList.toggle('active',b.dataset.mod===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('#topnav button').forEach(b=>b.addEventListener('click',()=>goMod(b.dataset.mod)));
+
+/* ---------- Reveal cards ---------- */
+document.addEventListener('click',e=>{
+  const r=e.target.closest('.reveal'); if(r) r.classList.toggle('open');
+  const f=e.target.closest('.flip-wrap'); if(f) f.classList.toggle('flipped');
+});
+
+/* ---------- Spielfeld-Infos (Modul 1) ---------- */
+const courtData={
+  feld:'<b>Spielfeld:</b> 28 m (Seitenlinien) × 15 m (Grund-/Endlinien). Die Linien gehören <b>nicht</b> zum Feld – Berührung mit Ball = „Aus“ → Einwurf für die Gegner. Die Spielfläche (32 × 19 m) bietet 2 m Aktionsraum für Einwürfe. <i>(Kolb 2025, Kap. 2.2, S. 7)</i>',
+  mitte:'<b>Mittellinie (time-line):</b> teilt Vor- und Rückfeld. In 8 s muss der Ball drüber; danach gilt „kein Rückspiel“ – die Mittellinie gehört zum <b>Rückfeld</b>! <i>(Kap. 2.3, S. 14)</i>',
+  mittelkreis:'<b>Mittelkreis:</b> Hier wird das Spiel per Sprungball/Jump ball eröffnet. Danach regelt der <b>Einwurfpfeil</b> (wechselnder Ballbesitz) alle weiteren Sprungballsituationen. <i>(Kap. 2.3, S. 12 f.)</i>',
+  zone:'<b>Zone (box):</b> Viereck von der Grundlinie bis zur Freiwurflinie. Hier gilt die <b>3-Sekunden-Regel für Angreifer*innen</b> (nicht für die Verteidigung!). <i>(Kap. 2.2 + 2.3, S. 9, 19)</i>',
+  fwl:'<b>Freiwurflinie (FWL):</b> 5,80 m von der Grundlinie entfernt, parallel zu ihr. Hinter ihr werden Freiwürfe ausgeführt (5 s Zeit, 1 Punkt pro Treffer). Die „verlängerte FWL“ ist eine wichtige taktische Orientierungslinie. <i>(Kap. 2.2, S. 9)</i>',
+  drei:'<b>3-Punkte-Linie:</b> Halbkreis mit <b>6,75 m</b> Abstand zur Korbringmitte (vor 2010: 6,25 m). Treffer von hinter der Linie = 3 Punkte; die Linie selbst gehört zum 2-Punkte-Bereich! <i>(Kap. 2.2, S. 9; Abb. 2.5)</i>',
+  nocharge:'<b>No-Charge-Halbkreis:</b> In diesem Raum wird dem Angreifer mit Ball beim Rempeln in der Luft <b>kein Offensiv-Foul</b> gepfiffen. Entstand, weil unter dem Korb zu oft Fouls „gezogen“ wurden. Neu seit der Regelreform 2010. <i>(Kap. 2.2 + 2.3, S. 7, 19)</i>',
+  korb:'<b>Korb:</b> Brett (board), Ring (rim), Netz (net), Aufhängung. Ringhöhe: <b>3,05 m</b> (Minibasketball: 2,60 m). Der Ball muss von oben durch Ring und Netz fallen. <i>(Kap. 2.2 + 2.4; Dunking-Formel Kap. 4.3)</i>'
+};
+document.querySelectorAll('.cpart').forEach(el=>{
+  el.addEventListener('click',ev=>{ev.stopPropagation();
+    document.getElementById('courtInfo').innerHTML=courtData[el.dataset.info]||'';
+    document.querySelectorAll('.cpart').forEach(c=>c.style.filter='');
+    el.style.filter='drop-shadow(0 0 6px #ff8a50)';
+  });
+});
+
+/* ---------- Grundaufstellungen (Modul 2) ---------- */
+const formations={
+  '122':{caption:'1-2-2: alle hinter der 3-Punkte-Linie (weite Aufstellung)',
+    info:'<b>1-2-2 Grundaufstellung:</b> Aufbau (1) an der Stirnseite der 3er-Linie, Flügel (2, 3) rechts/links auf FWL-Höhe, Center (4, 5) Richtung Grundlinie. Basis-Aufstellung – entspricht als „3 out – 2 in“ der Mannschaftstaktik aus Kap. 5.3.2. <i>(Kolb 2025, Abb. 3.1)</i>',
+    pts:[[200,290,'1'],[70,180,'2'],[330,180,'3'],[95,80,'4'],[305,80,'5']]},
+  '131':{caption:'1-3-1: high post besetzt, ein low post',
+    info:'<b>1-3-1 Grundaufstellung:</b> Aufbau (1) und Flügel (2, 3) hinter der 3er-Linie + mittige <b>High-Post-Position</b> (4) an der FWL + eine <b>Low-Post-Position</b> (5) am Zonenrand. Wird auch als „Schablonen“-Angriffssystem genutzt (Kap. 5.3.3). <i>(Abb. 3.2)</i>',
+    pts:[[200,290,'1'],[60,150,'2'],[340,150,'3'],[200,155,'4'],[245,55,'5']]},
+  '14':{caption:'1-4: Überlagerung auf FWL-Höhe → „clear out“ unter dem Korb',
+    info:'<b>1-4 Grundaufstellung:</b> Aufbau (1) + vier Spieler*innen auf FWL-Höhe: zwei Flügel außen (2, 3), zwei High Posts an den FWL-Ecken/<b>Elbows</b> (4, 5). Erzeugt freien Raum unter dem Korb (<b>clear out</b>) für ein geplantes 1-gegen-1. <i>(Abb. 3.3)</i>',
+    pts:[[200,290,'1'],[45,150,'2'],[355,150,'3'],[152,150,'4'],[248,150,'5']]},
+  '32':{caption:'3-Out-2-In: 3 Außen + 2 Innen (ballseitig tief, ballfern hoch)',
+    info:'<b>3-Out-2-In:</b> Gruppierung in Außenspieler*innen (1–3, hinter der 3er-Linie) und Innenspieler*innen (4, 5 an der Zone). Grundlage des Angriffs nach Prinzipien (Kap. 5.3.2, SE 10). Varianten je nach Kader: 2-out-3-in, 4-out-1-in. <i>(Kap. 3, S. 26)</i>',
+    pts:[[200,290,'1'],[60,170,'2'],[340,170,'3'],[135,60,'4'],[262,120,'5']]}
+};
+function setFormation(key){
+  const f=formations[key];
+  document.getElementById('formPlayers').innerHTML=f.pts.map(p=>
+    `<circle cx="${p[0]}" cy="${p[1]}" r="14" fill="var(--accent)" stroke="#fff" stroke-width="2"/><text x="${p[0]}" y="${p[1]+4}" font-size="13" font-weight="bold" text-anchor="middle" fill="#111">${p[2]}</text>`).join('');
+  document.getElementById('formCaption').textContent=f.caption;
+  document.getElementById('formInfo').innerHTML=f.info;
+  ['f122','f131','f14','f32'].forEach(id=>document.getElementById(id).classList.add('ghost'));
+  document.getElementById('f'+key).classList.remove('ghost');
+}
+setFormation('122');
+
+/* ---------- Korbleger-Animation ---------- */
+function playLayup(){
+  const b=document.getElementById('layBall'),msg=document.getElementById('layMsg');
+  const steps=[['st0','„0“ – linker Fuß + letztes Dribbling (Kreuzgang rechts)'],['st1','„1“ – rechter Fuß, Ball beidhändig sichern'],['st2','„2“ – Stemmschritt links → Absprung!']];
+  ['st0','st1','st2'].forEach(id=>document.getElementById(id).setAttribute('opacity','.25'));
+  b.setAttribute('opacity','1');
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i<3){document.getElementById(steps[i][0]).setAttribute('opacity','1');msg.textContent=steps[i][1];i++;}
+    else{clearInterval(iv);msg.textContent='Abwurf am höchsten Punkt → kleine Brettecke → Korb! Landung beidbeinig.';}
+  },900);
+  const anim=document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+  anim.setAttribute('dur','3.6s');anim.setAttribute('fill','freeze');
+  const mp=document.createElementNS('http://www.w3.org/2000/svg','mpath');
+  mp.setAttribute('href','#layPath');anim.appendChild(mp);
+  b.replaceChildren(anim);anim.beginElement?anim.beginElement():null;
+}
+
+/* ---------- Give&Go&Fill Animation ---------- */
+function moveTo(el,x,y,dur){el.style.transition=`cx ${dur}ms, cy ${dur}ms`;el.setAttribute('cx',x);el.setAttribute('cy',y);}
+function animAttr(el,x,y,dur=800){
+  const sx=+el.getAttribute('cx'),sy=+el.getAttribute('cy'),t0=performance.now();
+  function step(t){const p=Math.min((t-t0)/dur,1);el.setAttribute('cx',sx+(x-sx)*p);el.setAttribute('cy',sy+(y-sy)*p);
+    const txt=document.getElementById(el.id+'T')||document.getElementById(el.dataset.label||'');
+    if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+function syncText(cid,tid){const c=document.getElementById(cid),t=document.getElementById(tid);
+  function loop(){t.setAttribute('x',c.getAttribute('cx'));t.setAttribute('y',+c.getAttribute('cy')+4);requestAnimationFrame(loop);}loop();}
+['ggfP1,ggfT1','ggfP2,ggfT2','ggfP3,ggfT3','pnrA,pnrAT','pnrB,pnrBT','pnrD,pnrDT','spvA1,spvA1T','spvA2,spvA2T','spvA3,spvA3T'].forEach(pair=>{const[a,b]=pair.split(',');syncText(a,b);});
+
+function resetGGF(){
+  animAttr(document.getElementById('ggfP1'),170,235,300);
+  animAttr(document.getElementById('ggfP2'),285,120,300);
+  animAttr(document.getElementById('ggfP3'),55,120,300);
+  animAttr(document.getElementById('ggfBall'),170,220,300);
+  document.getElementById('ggfMsg').textContent='1 = Aufbau (Ball) · 2/3 = Flügel — „Abspielen“ drücken';
+}
+function playGGF(){
+  resetGGF();
+  const P1=document.getElementById('ggfP1'),P2=document.getElementById('ggfP2'),P3=document.getElementById('ggfP3'),ball=document.getElementById('ggfBall'),msg=document.getElementById('ggfMsg');
+  setTimeout(()=>{msg.textContent='① GIVE: Pass vom Aufbau auf den rechten Flügel';animAttr(ball,272,128,700);},600);
+  setTimeout(()=>{msg.textContent='② GO: Passgeber*in schneidet (Banana-Cut) zum Korb';animAttr(P1,200,70,1200);},1600);
+  setTimeout(()=>{msg.textContent='③ FILL: linker Flügel füllt die Aufbauposition auf';animAttr(P3,150,225,1200);},2900);
+  setTimeout(()=>{msg.textContent='④ Rückpass (Bodenpass) in die Zone …';animAttr(ball,205,72,600);},4200);
+  setTimeout(()=>{msg.textContent='⑤ … Korbleger! Ohne Rückpass: freie Außenposition auffüllen.';animAttr(ball,170,45,500);},5000);
+}
+
+/* ---------- Pick&Roll Animation ---------- */
+function resetPNR(){
+  animAttr(document.getElementById('pnrA'),170,235,300);
+  animAttr(document.getElementById('pnrB'),255,130,300);
+  animAttr(document.getElementById('pnrD'),170,200,300);
+  animAttr(document.getElementById('pnrBall'),170,220,300);
+  document.getElementById('pnrMsg').textContent='A = Ballbesitz · B = Blocksteller · X = Verteidigung';
+}
+function playPNR(){
+  resetPNR();
+  const A=document.getElementById('pnrA'),B=document.getElementById('pnrB'),D=document.getElementById('pnrD'),ball=document.getElementById('pnrBall'),msg=document.getElementById('pnrMsg');
+  setTimeout(()=>{msg.textContent='① B stellt den direkten Block (stabil!) an X';animAttr(B,150,195,1000);},500);
+  setTimeout(()=>{msg.textContent='② A wartet, bis der Block steht – dann schulterdicht vorbei!';},1600);
+  setTimeout(()=>{animAttr(A,120,140,900);animAttr(ball,110,130,900);},2400);
+  setTimeout(()=>{msg.textContent='③ X hängt im Block – A dribbelt zum Korb';animAttr(A,155,70,900);animAttr(ball,148,60,900);},3400);
+  setTimeout(()=>{msg.textContent='④ ROLL: B rollt ab (Sternschritt rückwärts) und bietet sich an';animAttr(B,215,90,1000);},4400);
+  setTimeout(()=>{msg.textContent='⑤ Abschluss per Korbleger – oder Pass zum abrollenden B!';animAttr(ball,170,45,500);},5600);
+}
+
+/* ---------- SPV Zustände ---------- */
+function spvState(s){
+  const D1=document.getElementById('spvD1'),D2=document.getElementById('spvD2'),D3=document.getElementById('spvD3'),ball=document.getElementById('spvBall'),msg=document.getElementById('spvMsg');
+  if(s===0){animAttr(ball,170,215,500);animAttr(D1,170,200,700);animAttr(D2,258,128,700);animAttr(D3,82,128,700);
+    msg.textContent='Ball auf 1: D1 eng am Ball, D2 & D3 (je 1 Passweg) eng-bereit';}
+  if(s===1){animAttr(ball,278,122,500);animAttr(D2,285,135,700);animAttr(D1,195,205,700);animAttr(D3,140,95,700);
+    msg.textContent='Ball auf 2: D2 eng · D1 (1 Passweg) nah · D3 sinkt ab in die help-position!';}
+  if(s===2){animAttr(ball,62,122,500);animAttr(D3,55,135,700);animAttr(D1,150,205,700);animAttr(D2,205,95,700);
+    msg.textContent='Ball auf 3: D3 eng · D1 nah · D2 sinkt ab Richtung Zone/Ball (weak side = help side)';}
+}
+
+/* ---------- Schiedsrichterzeichen ---------- */
+function figSVG(arms,extra){
+  return `<svg viewBox="0 0 120 145" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#c8d2e8" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="60" y1="34" x2="60" y2="82"/>
+    <line x1="60" y1="82" x2="47" y2="120"/><line x1="60" y1="82" x2="73" y2="120"/>
+    ${arms}
+  </g>
+  <circle cx="60" cy="22" r="10" fill="#c8d2e8"/>
+  ${extra||''}
+</svg>`;
+}
+const AR='#ff8a50';
+function num(x,y,n){return `<circle cx="${x}" cy="${y}" r="9" fill="${AR}"/><text x="${x}" y="${y+4}" font-size="11" font-weight="bold" text-anchor="middle" fill="#fff">${n}</text>`;}
+function fist(x,y){return `<circle cx="${x}" cy="${y}" r="6" fill="#c8d2e8"/>`;}
+function palm(x,y){return `<rect x="${x-5}" y="${y-7}" width="10" height="14" rx="3" fill="#c8d2e8"/>`;}
+function arrow(d){return `<path d="${d}" fill="none" stroke="${AR}" stroke-width="2.5" stroke-dasharray="4 3" marker-end="url(#ah)"/>`;}
+const AH='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#ff8a50"/></marker></defs>';
+
+const signals=[
+ // Punkte
+ {c:'punkte',n:'1 Punkt',d:'Ein Finger; Handgelenk abklappen (wie Freiwurf-Treffer)',a:'<polyline points="60,48 82,38 90,16"/>',e:AH+num(93,10,1)+arrow('M 98 22 Q 104 32 96 40')},
+ {c:'punkte',n:'2 Punkte',d:'Zwei Finger; Handgelenk abklappen',a:'<polyline points="60,48 82,38 90,16"/>',e:AH+num(93,10,2)+arrow('M 98 22 Q 104 32 96 40')},
+ {c:'punkte',n:'3-Punkte-Versuch',d:'EIN Arm gestreckt hoch, drei Finger',a:'<polyline points="60,48 74,28 80,6"/>',e:num(85,6,3)},
+ {c:'punkte',n:'3-Punkte-Treffer',d:'BEIDE Arme gestreckt hoch, je drei Finger',a:'<polyline points="60,48 74,28 80,6"/><polyline points="60,48 46,28 40,6"/>',e:num(85,6,3)+num(35,6,3)},
+ // Spielverwaltung
+ {c:'spiel',n:'Uhr stoppen',d:'Offene Hand nach oben gestreckt',a:'<polyline points="60,48 74,28 80,10"/>',e:palm(82,8)},
+ {c:'spiel',n:'Uhr stoppen bei Foul',d:'Faust hoch – andere Hand zeigt ggf. auf die foulende Person',a:'<polyline points="60,48 74,28 80,10"/><polyline points="60,48 40,60 24,64"/>',e:fist(82,8)},
+ {c:'spiel',n:'Uhr starten',d:'Offene Hand „hackt“ von oben ab',a:'<polyline points="60,48 78,34 88,20"/>',e:AH+palm(90,17)+arrow('M 100 22 Q 106 34 98 44')},
+ {c:'spiel',n:'Auszeit (Time-out)',d:'Hände formen ein „T“',a:'<polyline points="60,48 72,30 74,12"/><polyline points="60,48 46,34 60,18"/>',e:'<line x1="60" y1="8" x2="88" y2="8" stroke="#c8d2e8" stroke-width="6" stroke-linecap="round"/><line x1="74" y1="8" x2="74" y2="14" stroke="#c8d2e8" stroke-width="6" stroke-linecap="round"/>'},
+ {c:'spiel',n:'Einwechslung',d:'Unterarme vor der Brust gekreuzt',a:'<polyline points="60,48 44,54 76,66"/><polyline points="60,48 76,54 44,66"/>',e:''},
+ {c:'spiel',n:'Einwurfrichtung / Aus',d:'Gestreckter Arm zeigt parallel zur Seitenlinie in Spielrichtung',a:'<polyline points="60,48 82,46 104,44"/>',e:AH+arrow('M 88 36 L 106 34')},
+ {c:'spiel',n:'Wechselnder Ballbesitz',d:'Daumen hoch, dann Arm in Spielrichtung (Sprungball-Situation)',a:'<polyline points="60,48 76,34 82,18"/><polyline points="60,48 84,52 102,50"/>',e:AH+`<text x="88" y="12" font-size="14">👍</text>`+arrow('M 90 42 L 106 42')},
+ // Violations
+ {c:'violation',n:'Schrittfehler (Traveling)',d:'Fäuste kreisen umeinander',a:'<polyline points="60,48 44,58 46,72"/><polyline points="60,48 76,58 74,72"/>',e:AH+fist(46,74)+fist(74,74)+arrow('M 42 88 Q 60 100 78 88')+arrow('M 78 62 Q 60 50 42 62')},
+ {c:'violation',n:'Doppeldribbling',d:'Beide Handflächen „prellen“ abwechselnd auf und ab',a:'<polyline points="60,48 42,60 40,76"/><polyline points="60,48 78,60 80,76"/>',e:AH+palm(40,80)+palm(80,80)+arrow('M 40 92 L 40 106')+arrow('M 80 106 L 80 92')},
+ {c:'violation',n:'Schaufeln (Carrying)',d:'Handfläche macht eine halbe Drehung',a:'<polyline points="60,48 82,52 94,60"/>',e:AH+palm(96,62)+arrow('M 104 52 Q 112 62 104 72')},
+ {c:'violation',n:'3 Sekunden',d:'Drei Finger, Arm zeigt seitlich zur Zone',a:'<polyline points="60,48 82,44 100,40"/>',e:num(105,38,3)},
+ {c:'violation',n:'5 Sekunden',d:'Offene Hand – fünf Finger hoch',a:'<polyline points="60,48 74,28 80,10"/>',e:num(84,6,5)},
+ {c:'violation',n:'8 Sekunden',d:'Acht Finger (beide Hände) hoch',a:'<polyline points="60,48 74,28 80,10"/><polyline points="60,48 46,28 40,10"/>',e:num(84,6,8)},
+ {c:'violation',n:'24 Sekunden',d:'Finger tippen auf die (eigene) Schulter',a:'<polyline points="60,48 84,40 74,34"/>',e:AH+num(96,44,24)+arrow('M 84 26 Q 76 28 70 32')},
+ {c:'violation',n:'Rückspiel (Over and back)',d:'Arm pendelt vor dem Körper Richtung Rückfeld',a:'<polyline points="60,48 82,50 100,58"/>',e:AH+arrow('M 100 48 Q 84 34 66 34')},
+ // Fouls
+ {c:'foul',n:'Halten (Holding)',d:'Handgelenk des angewinkelten Arms greifen und nach unten',a:'<polyline points="60,48 76,36 80,20"/><polyline points="60,48 76,54 80,32"/>',e:fist(80,26)},
+ {c:'foul',n:'Stoßen (Pushing)',d:'Stoßbewegung mit beiden Handflächen nach vorn',a:'<polyline points="60,48 78,50 92,48"/><polyline points="60,48 78,62 92,60"/>',e:AH+palm(94,48)+palm(94,60)+arrow('M 100 54 L 114 54')},
+ {c:'foul',n:'Rempeln mit Ball (Charging)',d:'Faust schlägt in die offene Handfläche',a:'<polyline points="60,48 44,58 48,70"/><polyline points="60,48 78,54 74,66"/>',e:AH+palm(48,74)+fist(74,70)+arrow('M 74 78 Q 62 84 54 78')},
+ {c:'foul',n:'Blockieren (Blocking)',d:'Beide Hände in die Hüften gestemmt',a:'<polyline points="60,48 42,60 50,76"/><polyline points="60,48 78,60 70,76"/>',e:''},
+ {c:'foul',n:'Technisches Foul',d:'Hände formen ein „T“ (wie Auszeit, aber als Foulanzeige nach Pfiff)',a:'<polyline points="60,48 72,30 74,12"/><polyline points="60,48 46,34 60,18"/>',e:'<line x1="60" y1="8" x2="88" y2="8" stroke="#c8d2e8" stroke-width="6" stroke-linecap="round"/><line x1="74" y1="8" x2="74" y2="14" stroke="#c8d2e8" stroke-width="6" stroke-linecap="round"/><text x="20" y="20" font-size="12" fill="#ff8a50" font-weight="bold">T!</text>'},
+ {c:'foul',n:'Unsportliches Foul',d:'Ein Handgelenk hoch über dem Kopf greifen',a:'<polyline points="60,48 70,26 72,8"/><polyline points="60,48 50,26 66,16"/>',e:fist(72,10)},
+ {c:'foul',n:'Disqualifizierendes Foul',d:'Beide Fäuste hoch über den Kopf',a:'<polyline points="60,48 74,28 80,8"/><polyline points="60,48 46,28 40,8"/>',e:fist(80,7)+fist(40,7)}
+];
+let sigHidden=false;
+function renderSignals(filter='alle'){
+  const g=document.getElementById('sigGrid');
+  g.innerHTML=signals.filter(s=>filter==='alle'||s.c===filter).map((s,i)=>`
+    <div class="sig-card ${sigHidden?'':'revealed'}" onclick="this.classList.toggle('revealed')">
+      ${figSVG(s.a,s.e)}
+      <div class="hidden-label"><div class="sig-name">${s.n}</div><div class="sig-desc">${s.d}</div></div>
+    </div>`).join('');
+}
+function toggleSigMode(){
+  sigHidden=!sigHidden;
+  document.getElementById('sigModeBtn').textContent=sigHidden?'👁 Lernmodus aktiv – klick Karten zum Aufdecken':'🙈 Lernmodus: Namen verstecken';
+  renderSignals(currentSigFilter);
+}
+let currentSigFilter='alle';
+function filterSig(f){currentSigFilter=f;renderSignals(f);}
+renderSignals();
+
+/* ---------- Zahlen-Drill ---------- */
+const facts=[
+ ['Spielfeld-Maße?','28 × 15 m (Spielfläche 32 × 19 m)'],
+ ['Abstand 3-Punkte-Linie?','6,75 m von der Korbringmitte (vor 2010: 6,25 m)'],
+ ['Abstand Freiwurflinie zur Grundlinie?','5,80 m'],
+ ['Ringhöhe? (Mini?)','3,05 m · Minibasketball: 2,60 m'],
+ ['Spielzeit?','4 × 10 min + Verlängerung(en) à 5 min (gestoppte Zeit)'],
+ ['Wie viele Auszeiten?','5 pro Spiel: 2 in HZ 1, 3 in HZ 2 (max. 2 in den letzten 2 Min.), +1 pro Verlängerung'],
+ ['Wurfzeit? Reset-Werte?','24 s · Reset auf 24 s oder 14 s'],
+ ['Persönliche Fouls bis zum Ausschluss?','5 (auch: 2 technische / 2 unsportliche / 1+1)'],
+ ['Ab wie vielen Teamfouls Freiwürfe?','Ab dem 5. Mannschaftsfoul pro Viertel: 2 Freiwürfe'],
+ ['Ballgrößen?','5 bis U12 · 6 ab U14 + Frauen · 7 Männer ab U16 · 3×3: Größe 6 mit Gewicht 7'],
+ ['Wie viele Spieler*innen an der Zone beim Freiwurf?','Max. 5 zusätzlich; korbnächste + korbfernste Plätze: Verteidigung'],
+ ['Max. Schritte mit gehaltenem Ball in der Bewegung?','2 Schritte – dann muss der Ball die Hand verlassen'],
+ ['Technikprüfung: Note 1,0 bei Freiwurf/Korbleger?','13+ Treffer (15 Freiwürfe bzw. 1 Min. Korbleger); 4,0 = 4 Treffer'],
+ ['Anteile der Praxisnote?','Technik 40 % · Taktik (5 gegen 5) 60 %'],
+ ['Minibasketball-Spielzeit?','8 × 5 min (U8: 8 × 4 min), 4 gegen 4 (U8: 3 gegen 3)'],
+ ['Die 3 Handwechsel der Dribbling-Prüfung?','cross (vor dem Körper) · behind (hinter dem Rücken) · between (durch die Beine)']
+];
+function shuffle(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);}
+function buildFactCards(){
+  document.getElementById('factCards').innerHTML=shuffle([...facts]).slice(0,9).map(f=>`
+   <div class="flip-wrap"><div class="flip">
+     <div class="face front"><b>${f[0]}</b><p class="muted" style="margin-top:.5rem;font-size:.75rem">klicken zum Umdrehen</p></div>
+     <div class="face back"><p>${f[1]}</p></div>
+   </div></div>`).join('');
+}
+buildFactCards();
+
+/* ---------- Quiz ---------- */
+const quizPool=[
+ {q:'Ein Team hat den Ball ins Vorfeld gebracht. Ein Pass landet auf der Mittellinie beim Mitspieler. Was gilt?',o:['Weiterspielen – die Mittellinie ist neutral','Rückspiel! Die Mittellinie gehört zum Rückfeld','Sprungball','8-Sekunden-Verstoß'],k:1,src:'Kap. 2.3'},
+ {q:'Wann darf beim Sternschritt das Standbein den Boden verlassen?',o:['Nie','Wenn der Ball die Hand verlassen hat, bevor der Fuß wieder aufsetzt','Nur nach einem Einkontaktstopp','Nur in der Zone'],k:1,src:'Kap. 4.1.4'},
+ {q:'Welcher Handwechsel ist laut Buch bei KÖRPERKONTAKT mit der Verteidigung ideal?',o:['Cross','Behind (und between)','Keiner – dann nie wechseln','Nur beidhändig'],k:1,src:'Kap. 4.2'},
+ {q:'Korbleger von rechts: Mit welchem Fuß wird abgesprungen?',o:['Rechts','Links','Beidbeinig','Egal'],k:1,src:'Kap. 4.3.2'},
+ {q:'Was kennzeichnet die Krabbentechnik?',o:['Überkreuzende Beine für Tempo','Seitlich-rückwärts, flache lange Schritte, KSP konstant tief, Beine kreuzen nie','Frontales Rückwärtslaufen','Hoher Körperschwerpunkt für Übersicht'],k:1,src:'Kap. 4.5'},
+ {q:'Wohin lenkt die Verteidigung das Dribbling im Normalfall?',o:['In die Spielfeldmitte','Zur Außenlinie','Zum eigenen Korb','Richtung Mittelkreis'],k:1,src:'Kap. 5.1.4'},
+ {q:'give & go & fill: Was macht die Person nach ihrem Pass?',o:['Bleibt stehen (safety)','Schneidet zum Korb (go) und bietet sich für den Rückpass an','Stellt sofort einen Block','Läuft zur Bank'],k:1,src:'Kap. 5.2.1'},
+ {q:'Wann ist ein direkter Block sinnlos/kontraproduktiv?',o:['Wenn die ballbesitzende Person noch nicht gedribbelt hat','Wenn die ballbesitzende Person bereits zum Korb dribbelt','Wenn die Verteidigung eng steht','Wenn der Block an der 3er-Linie steht'],k:1,src:'Kap. 5.2.2'},
+ {q:'Warum soll Switchen bei der Einführung der Blockverteidigung vermieden werden?',o:['Es ist verboten','Gefahr von Miss-Match und Überzahl am Korb; der Angriff lernt falsches Verhalten','Es ist zu anstrengend','Es funktioniert nur in der Zone'],k:1,src:'Kap. 5.2.3'},
+ {q:'SPV: Wer verteidigt eng, wer sinkt ab?',o:['Alle eng','Ball + 1. Passweg eng; ab dem 2. Passweg (weak side) absinken','Nur der Center sinkt ab','Alle sinken ab'],k:1,src:'Kap. 5.2.4'},
+ {q:'Was bedeutet „Absinken“ genau?',o:['Zum eigenen Korb sprinten','Weg vom Gegenspieler – Richtung Korb UND Richtung Ball (help-position)','Auf die Bank gehen','In die Zone setzen'],k:1,src:'Kap. 5.2.4'},
+ {q:'Nummerierter Schnellangriff: Wer sprintet auf den Außenspuren?',o:['Die Center (4+5)','Die Flügel (2+3)','Der Aufbau (1)','Alle'],k:1,src:'Kap. 5.3.1'},
+ {q:'Wer wirft beim nummerierten Schnellangriff nach Korberfolg schnell ein?',o:['1 (Aufbau)','5 (Center)','2 (Flügel)','Der Coach'],k:1,src:'Kap. 5.3.1'},
+ {q:'3-Out-2-In: Wo stehen die Innenspieler*innen?',o:['Beide low post','Ballseitig tief aufgepostet, ballfern hoch an der Zonenseite','Beide an der FWL','Hinter der 3er-Linie'],k:1,src:'Kap. 5.3.2'},
+ {q:'SPV 5-5: Ball unterhalb der verlängerten FWL – wie wird der Low Post verteidigt?',o:['half-deny','full-deny','Gar nicht','Doppeln'],k:1,src:'Kap. 5.3.4'},
+ {q:'SPV 5-5: Von welcher Seite kommt die Hilfe?',o:['Ballseite','Immer von der ballfernen Seite','Von der Bank','Vom High Post'],k:1,src:'Kap. 5.3.4'},
+ {q:'Warum ist im Jugendbereich (JBBL/NBBL/WNBL) Zonenverteidigung verboten?',o:['Zu effektiv gegen Korbleger – Personenverteidigung ist vorgeschrieben (DBB 2019)','Zu anstrengend','Regeländerung 2010','Sie ist nicht verboten'],k:0,src:'Kap. 5.3.5'},
+ {q:'Nach einem Wurf berührt der Ball nur das Brett, nicht den Ring. Was passiert mit der Wurfuhr?',o:['Reset auf 24 s','Reset auf 14 s','Sie läuft ununterbrochen weiter','Sie stoppt'],k:2,src:'Kap. 2.3'},
+ {q:'Treffer trotz Foul beim 3-Punkte-Wurf + Bonusfreiwurf getroffen – wie viele Punkte maximal?',o:['3','4','5','2'],k:1,src:'Kap. 2.3'},
+ {q:'Welche Plätze an der Zone besetzt die VERTEIDIGUNG beim Freiwurf?',o:['Die mittleren','Die korbnächsten und korbfernsten','Keine','Alle'],k:1,src:'Kap. 2.3'},
+ {q:'Was ist „Facing“?',o:['Ein Foul','Frontal zum Korb ausrichten in die shot-pass-dribble-Position','Ein Passtyp','Die Verteidigungshaltung'],k:1,src:'Kap. 5.1.3'},
+ {q:'Ausboxen (box out) dient wozu?',o:['Den Passweg zu blockieren','Den Gegner beim Rebound vom Korb auszusperren','Einen Block zu stellen','Zeit zu schinden'],k:1,src:'Kap. 5.1.5'},
+ {q:'Welcher Pass eignet sich laut Buch gegen GRÖSSERE Verteidiger*innen?',o:['Überkopfpass','Bodenpass','Schleuderpass','Lobpass in den eigenen Rücken'],k:1,src:'Kap. 4.4, Tab. 4.3'},
+ {q:'Wie beginnt jedes Viertel außer dem ersten?',o:['Sprungball','Einwurf an der verlängerten Mittellinie (wechselnder Ballbesitz)','Freiwurf','Einwurf an der Grundlinie'],k:1,src:'Kap. 2.3'}
+];
+let qz={list:[],i:0,score:0};
+function startQuiz(){
+  qz={list:shuffle([...quizPool]).slice(0,10),i:0,score:0};
+  showQ();
+}
+function showQ(){
+  const c=document.getElementById('quizContent');
+  document.getElementById('quizProg').style.width=(qz.i/10*100)+'%';
+  if(qz.i>=qz.list.length){
+    const pct=qz.score/qz.list.length;
+    const fb=pct>=.9?'🏆 Stark – klausurbereit!':pct>=.7?'👍 Solide, Lücken gezielt nachlesen.':pct>=.5?'📚 Halbzeit – nochmal durch die Module!':'🚨 Zurück auf Los: Module 1–4 wiederholen.';
+    c.innerHTML=`<h3 style="margin-top:0">Ergebnis: ${qz.score} / ${qz.list.length}</h3><p>${fb}</p><button class="btn" onclick="startQuiz()">Nochmal (neue Fragen)</button>`;
+    document.getElementById('quizProg').style.width='100%';return;
+  }
+  const q=qz.list[qz.i];
+  c.innerHTML=`<p class="muted">Frage ${qz.i+1} von ${qz.list.length}</p><p><b>${q.q}</b></p>`+
+    q.o.map((o,j)=>`<button class="quiz-opt" onclick="answerQ(this,${j})">${o}</button>`).join('')+
+    `<p class="muted" id="qNext" style="display:none;margin-top:.6rem"></p>`;
+}
+function answerQ(btn,j){
+  const q=qz.list[qz.i];
+  document.querySelectorAll('.quiz-opt').forEach((b,idx)=>{
+    b.disabled=true;
+    if(idx===q.k)b.classList.add('correct');
+  });
+  if(j===q.k){qz.score++;}else{btn.classList.add('wrong');}
+  const n=document.getElementById('qNext');
+  n.style.display='block';
+  n.innerHTML=`${j===q.k?'✅ Richtig!':'❌ Leider nicht.'} <em>(Beleg: Kolb 2025, ${q.src})</em> &nbsp; <button class="btn small" onclick="qz.i++;showQ()">Weiter →</button>`;
+}
+
+/* ---------- V2: Cinematic Layer ---------- */
+(function(){
+  // Hero video crossfade (rAF, manual loop)
+  var v=document.getElementById('bgvid');
+  if(v){
+    var raf=null, fadingOut=false, FADE=500, LEAD=0.55;
+    function fadeTo(t,d){ if(raf)cancelAnimationFrame(raf);
+      var s=parseFloat(v.style.opacity||'0'), t0=performance.now();
+      function step(n){ var p=Math.min((n-t0)/(d||FADE),1);
+        v.style.opacity=String(s+(t-s)*p); if(p<1)raf=requestAnimationFrame(step);}
+      raf=requestAnimationFrame(step);}
+    v.addEventListener('loadeddata',function(){v.style.opacity='0';var pp=v.play(); if(pp&&pp.catch)pp.catch(function(){});fadeTo(1);});
+    v.addEventListener('timeupdate',function(){
+      if(!fadingOut && v.duration && v.duration-v.currentTime<=LEAD && v.duration-v.currentTime>0){fadingOut=true;fadeTo(0);}});
+    v.addEventListener('ended',function(){v.style.opacity='0';
+      setTimeout(function(){v.currentTime=0;var pp=v.play(); if(pp&&pp.catch)pp.catch(function(){});fadingOut=false;fadeTo(1);},100);});
+  }
+
+  // BlurText: Wort-für-Wort Blur-in für die Hero-Headline
+  var ht=document.getElementById('heroTitle');
+  if(ht){
+    var words=ht.textContent.trim().split(/\s+/);
+    ht.textContent='';
+    words.forEach(function(w,i){
+      var s=document.createElement('span');
+      s.textContent=w;
+      s.style.cssText='opacity:0;filter:blur(10px);transform:translateY(50px)';
+      ht.appendChild(s);
+      setTimeout(function(){
+        if(!s.animate)return; s.animate([
+          {opacity:0,filter:'blur(10px)',transform:'translateY(50px)'},
+          {opacity:.5,filter:'blur(5px)',transform:'translateY(-5px)'},
+          {opacity:1,filter:'blur(0px)',transform:'translateY(0)'}
+        ],{duration:700,easing:'ease-out',fill:'forwards'});
+      }, 300 + i*100);
+    });
+  }
+
+  // Modul-Wechsel: gestaffelter Blur-Einstieg der Inhalte
+  var _goMod = window.goMod;
+  window.goMod = function(id){
+    _goMod(id);
+    var kids=document.querySelectorAll('#mod-'+id+' > *');
+    var n=0;
+    kids.forEach(function(el){
+      if(el.classList.contains('hero'))return;
+      if(n>9)return;
+      el.classList.remove('blur-in');
+      void el.offsetWidth;
+      el.style.animationDelay=(n*0.07)+'s';
+      el.classList.add('blur-in');
+      n++;
+    });
   };
+})();
 
-  const CARDS = [
-    {
-      icon: ICONS.image,
-      title: "AI Scenery",
-      tags: ["Natural Context", "Photo Realism", "Infinite Settings", "Eco-Vibe"],
-      body: "AI analyzes your product to create indistinguishable natural environments — from Icelandic cliffs to misty forests.",
-    },
-    {
-      icon: ICONS.movie,
-      title: "Batch Production",
-      tags: ["Scale Fast", "Visual Consistency", "Time Saver", "Ready to Post"],
-      body: "Style your entire product line in minutes. Create a unified visual identity for catalogues and social media without weeks of retouching.",
-    },
-    {
-      icon: ICONS.lightbulb,
-      title: "Smart Lighting",
-      tags: ["Ray Tracing", "Physical Shadows", "Studio Quality", "Sunlight Sync"],
-      body: "Automatic lighting and material adjustment. Achieve flawless integration with realistic shadows and sunlight.",
-    },
-  ];
+/* V3: Hero-Bild Fade-in */
+(function(){
+  var im=document.getElementById('bgimg');
+  if(!im)return;
+  function fadeIn(){
+    var t0=performance.now();
+    function step(n){var p=Math.min((n-t0)/900,1);im.style.opacity=String(p);if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+  if(im.complete&&im.naturalWidth>0){fadeIn();}
+  else{im.addEventListener('load',fadeIn);im.addEventListener('error',function(){im.style.display='none';});}
+})();
 
-  const CapabilityCard = ({ card, delay }) => (
-    <motion.div
-      initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-      whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, ease: "easeOut", delay }}
-      className="liquid-glass rounded-[1.25rem] p-6 min-h-[360px] flex flex-col"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div className="liquid-glass rounded-[0.75rem] w-11 h-11 flex items-center justify-center shrink-0">
-          <svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 text-white">
-            <path d={card.icon} />
-          </svg>
-        </div>
-        <div className="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
-          {card.tags.map((tag) => (
-            <span key={tag} className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
+/* ---------- V4: Seiten-Hintergruende + Hover-Reveal mit Schweif ---------- */
+(function(){
+  var BG={start:'img/lockerroom.jpg',regeln:'img/spielregeln.jpg',positionen:'img/positionen.jpg',
+          techniken:'img/techniken.jpg',taktik:'img/taktik.jpg',zeichen:'img/zeichen.jpg',quiz:'img/start.jpg'};
+  var A=document.getElementById('pageBgA'),B=document.getElementById('pageBgB');
+  if(A&&B){
+    var cur=A,other=B;
+    var setBg=function(id){
+      var url=BG[id]||BG.start;
+      other.style.backgroundImage='url("'+url+'")';
+      other.style.opacity='1';
+      cur.style.opacity='0';
+      var t=cur;cur=other;other=t;
+    };
+    setBg('start');
+    var prev=window.goMod;
+    window.goMod=function(id){prev(id);setBg(id);};
+    Object.keys(BG).forEach(function(k){var im=new Image();im.src=BG[k];});
+  }
 
-      <div className="flex-1" />
+  /* Hover-Reveal: Game Day scheint mit Kometen-Schweif durch den Empty Court */
+  var hero=document.querySelector('#mod-start .hero');
+  var canvas=document.getElementById('revealCanvas');
+  if(!hero||!canvas||!canvas.getContext)return;
+  var ctx=canvas.getContext('2d');
+  if(!ctx)return;
+  var gd=new Image();gd.src='img/spielregeln.jpg';
+  var mask=document.createElement('canvas');
+  var mctx=mask.getContext('2d');
+  var base=document.getElementById('bgimg');
+  var pts=[],raf=null;
+  var TRAIL=700;      /* Lebensdauer eines Schweif-Punkts in ms */
+  var HEAD_R=185;     /* Radius am Kopf */
 
-      <div className="mt-6">
-        <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">{card.title}</h3>
-        <p className="mt-3 text-sm text-white/90 font-body font-light leading-snug max-w-[32ch]">{card.body}</p>
-      </div>
-    </motion.div>
-  );
+  function resize(){
+    canvas.width=mask.width=hero.clientWidth;
+    canvas.height=mask.height=hero.clientHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
 
-  const Capabilities = () => (
-    <section className="relative min-h-screen overflow-hidden bg-black">
-      <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_094631_d30ab262-45ee-4b7d-99f3-5d5848c8ef13.mp4"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+  document.addEventListener('pointermove',function(e){
+    var start=document.getElementById('mod-start');
+    if(!start||!start.classList.contains('active'))return;
+    var r=hero.getBoundingClientRect();
+    if(r.bottom<0||r.top>window.innerHeight)return;
+    var x=e.clientX-r.left,y=e.clientY-r.top;
+    if(x<0||y<0||x>r.width||y>r.height)return;
+    if(canvas.width!==hero.clientWidth||canvas.height!==hero.clientHeight)resize();
+    pts.push({x:x,y:y,t:performance.now()});
+    if(pts.length>48)pts.shift();
+    if(!raf)raf=requestAnimationFrame(draw);
+  });
 
-      <div className="relative z-10 px-8 md:px-16 lg:px-20 pt-24 pb-10 flex flex-col min-h-screen">
-        <div className="mb-auto">
-          <motion.p
-            initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-            whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-sm font-body text-white/80 mb-6"
-          >
-            // Capabilities
-          </motion.p>
-          <motion.h2
-            initial={{ filter: "blur(10px)", opacity: 0, y: 20 }}
-            whileInView={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-            className="font-heading italic text-white text-6xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]"
-          >
-            Production
-            <br />
-            evolved
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          {CARDS.map((card, i) => (
-            <CapabilityCard key={card.title} card={card} delay={i * 0.15} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-  window.Capabilities = Capabilities;
-</script>
-
-<!-- ============ App ============ -->
-<script type="text/babel" data-presets="react">
-  const { Hero, Capabilities } = window;
-
-  const App = () => (
-    <main className="bg-black">
-      <Hero />
-      <Capabilities />
-    </main>
-  );
-  window.App = App;
-
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(<App />);
+  function draw(now){
+    raf=null;
+    now=now||performance.now();
+    pts=pts.filter(function(p){return now-p.t<TRAIL;});
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(pts.length&&gd.complete&&gd.naturalWidth>0){
+      mctx.clearRect(0,0,mask.width,mask.height);
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        var age=(now-p.t)/TRAIL;                      /* 0 = frisch, 1 = alt */
+        var rad=HEAD_R*(1-age*0.78);                  /* Schweif laeuft spitz zu */
+        var al=(1-age)*(0.30+0.70*((i+1)/pts.length));/* hinten transparenter */
+        if(rad<4)continue;
+        var g=mctx.createRadialGradient(p.x,p.y,0,p.x,p.y,rad);
+        g.addColorStop(0,'rgba(255,255,255,'+al.toFixed(3)+')');
+        g.addColorStop(0.65,'rgba(255,255,255,'+(al*0.45).toFixed(3)+')');
+        g.addColorStop(1,'rgba(255,255,255,0)');
+        mctx.fillStyle=g;
+        mctx.beginPath();
+        mctx.arc(p.x,p.y,rad,0,6.2832);
+        mctx.fill();
+      }
+      /* object-fit:cover + object-position:top des Basis-Bilds exakt nachrechnen */
+      var hr=hero.getBoundingClientRect();
+      var br=base?base.getBoundingClientRect():hr;
+      var iw=gd.naturalWidth,ih=gd.naturalHeight;
+      var sc=Math.max(br.width/iw,br.height/ih);
+      var dw=iw*sc,dh=ih*sc;
+      var dx=(br.left-hr.left)+(br.width-dw)/2;
+      var dy=(br.top-hr.top);
+      ctx.drawImage(gd,dx,dy,dw,dh);
+      ctx.globalCompositeOperation='destination-in';
+      ctx.drawImage(mask,0,0);
+      ctx.globalCompositeOperation='source-over';
+    }
+    if(pts.length)raf=requestAnimationFrame(draw);
+  }
+})();
 </script>
 </body>
 </html>
